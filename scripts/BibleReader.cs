@@ -5,30 +5,53 @@ using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.Core;
 using VRC.SDKBase;
 using VRC.Udon;
 
 public class BibleReader : UdonSharpBehaviour
 {
-	public const float STREAM_MARGIN = 10f;
 	private const char SEP = '\n';
+
+	/// <summary>
+	/// Total number books in the entire Bible.
+	///</summary>
+	public const int MAX_BOOK_COUNT = 66;
+
+	/// <summary>
+	/// Total number of chapters in the Bible. Used to simplify reference indeces and quicken verse loading.
+	///</summary>
+	public const int MAX_CHAPTER_COUNT = 2000;
+
+	/// <summary>
+	/// Total number of verses in the entire Bible.
+	///</summary>
+	public const int MAX_VERSE_COUNT = 31102;
+
+	public const int LUT_REF_LENGTH = 8;
+
 	private const int VERSE_OFFSET = 0;
 
-	public readonly string[] BOOK_NAMES = new string[66];
-	public readonly string[] BOOK_ABBRS = new string[66];
-	public readonly int[] BOOK_SIZES = new int[66];
+	public readonly string[] BOOK_NAMES = new string[MAX_BOOK_COUNT];
+	public readonly string[] BOOK_ABBRS = new string[MAX_BOOK_COUNT];
+	public readonly int[] BOOK_SIZES = new int[MAX_BOOK_COUNT];
+	public readonly int[] CHAPTER_LOCATIONS = new int[MAX_CHAPTER_COUNT];
 
+	[SerializeField] private TextAsset book_lut;
 	[SerializeField] private TextAsset verse_lut;
 	[SerializeField] private TextAsset[] translation_lut;
-	[SerializeField] private GameObject pref_text;
-	private ScrollRect inst_scroll;
 
-	[SerializeField] private TextMeshProUGUI inst_text;
+
+	[SerializeField] private GameObject pref_title;
+	[SerializeField] private GameObject pref_content;
+
+	private ScrollRect inst_scroll;
+	private ReaderContentPanelBehaviour inst_content_start;
+	private ReaderContentPanelBehaviour inst_content_end;
 
 	[SerializeField] private int translation_index = 0;
-	[SerializeField] private float print_speed = 40f;
-
-	private int chapter_index = 0;
+	[SerializeField] private int book_index = 1;
+	[SerializeField] private int chapter_index = 49;
 
 	private string local_verse_lut;
 	private string local_translation_lut;
@@ -42,54 +65,76 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		inst_scroll = GetComponent<ScrollRect>();
 
+		var local_info_lut = book_lut.text;
+		for (var i = 0; i < MAX_BOOK_COUNT; i++)
+		{
+			var line_start = NthIndexOf(local_info_lut, SEP, i - 1);
+			var line_end = NthIndexOf(local_info_lut, SEP, i) - 1;
+
+			var line = local_info_lut.Substring(line_start, line_end - line_start);
+
+			var a = NthIndexOf(line, ',', 0);
+			var b = NthIndexOf(line, ',', 1);
+
+			BOOK_NAMES[i] = line.Substring(0, a - 1);
+			BOOK_ABBRS[i] = line.Substring(a, b - a - 1);
+			BOOK_SIZES[i] = int.Parse(line.Substring(b, line.Length - b));
+		}
+
 		local_verse_lut = verse_lut.text;
 		SwitchTranslation(translation_index);
-		Interact();
+
+		Refresh();
 	}
 
 	void Update()
 	{
 		if (prox_is_awaiting_scroll_head)
 			OnScrollPastHeadActually();
+	}
+
+	public void Refresh() => Refresh(book_index, chapter_index);
+	public void Refresh(int book, int chapter)
+	{
+		for (int i = 0; i < inst_scroll.content.childCount; i++)
+			Destroy(inst_scroll.content.GetChild(i).gameObject);
 
 		/** <<============================================================>> **/
 
-		// print_index += print_speed * Time.deltaTime;
-		// inst_text.maxVisibleCharacters = Mathf.FloorToInt(print_index);
+		inst_content_start = CreateNewChapterContent(book, chapter);
+		inst_content_end = inst_content_start;
+
+		if (inst_content_start.chapter_index == 1)
+		{
+			var title = CreateNewBookTitle(inst_content_start.book_index);
+			title.SetAsFirstSibling();
+		}
 	}
 
-	public override void Interact()
+	public void SwitchTranslation(int trans)
 	{
-		chapter_index++;
-		SetText(BuildChapter(1, chapter_index));
-	}
-
-	public void SwitchTranslation(int i)
-	{
-		translation_index = i;
-		SwitchTranslation(translation_lut[i]);
+		translation_index = trans;
+		SwitchTranslation(translation_lut[trans]);
 	}
 	public void SwitchTranslation(TextAsset data)
 	{
 		local_translation_lut = data.text;
+
+		var b = 0;
+		var c = 0;
+		for (int v = 1; v < MAX_VERSE_COUNT; v++)
+		{
+			if (GetLocation_Chapter(v) == c && GetLocation_Book(v) == b) continue;
+
+			CHAPTER_LOCATIONS[c] = NthIndexOf(local_translation_lut, SEP, v - 1);
+			b++;
+			c++;
+		}
 	}
-
-	public void SetText(string input)
-	{
-		inst_text.text = input;
-
-		print_index = 0f;
-		inst_text.maxVisibleCharacters = 0;
-	}
-
-	public TextMeshProUGUI inst_text_debug;
 
 	public void OnScrollValueChanged()
 	{
-		var scroll_y = inst_scroll.verticalScrollbar.value;
-
-		inst_text_debug.text = scroll_y.ToString();
-
+		var scroll_y = inst_scroll.verticalNormalizedPosition;
 		if (scroll_y > 1f) OnScrollPastHead();
 		else if (scroll_y < 0f) OnScrollPastTail();
 	}
@@ -100,8 +145,18 @@ public class BibleReader : UdonSharpBehaviour
 		prox_is_awaiting_scroll_head = true;
 		prox_preheight_scroll_head = GetCalculatedContentHeight();
 
-		var temp_new_text = (RectTransform)Instantiate(pref_text, inst_scroll.content).transform;
-		temp_new_text.SetAsFirstSibling();
+		var content = CreateNewChapterContent(inst_content_start.book_index, inst_content_start.chapter_index - 1);
+
+		if (content == null) return;
+
+		content.transform.SetAsFirstSibling();
+		if (content.chapter_index == 1)
+		{
+			var title = CreateNewBookTitle(content.book_index);
+			title.SetAsFirstSibling();
+		}
+
+		inst_content_start = content;
 		inst_scroll.enabled = false;
 	}
 
@@ -129,15 +184,52 @@ public class BibleReader : UdonSharpBehaviour
 
 	private void OnScrollPastTail()
 	{
-		var inst_text = Instantiate(pref_text, inst_scroll.content);
-		inst_text.transform.SetAsLastSibling();
+		var content = CreateNewChapterContent(inst_content_end.book_index, inst_content_end.chapter_index + 1);
+
+		if (content == null) return;
+
+		if (content.chapter_index == 1)
+		{
+			var title = CreateNewBookTitle(content.book_index);
+			title.SetAsLastSibling();
+		}
+		content.transform.SetAsLastSibling();
+
+		inst_content_end = content;
 	}
 
-	public void OnDestroyChild()
+	private ReaderContentPanelBehaviour CreateNewChapterContent(int book, int chapter)
 	{
+		if (chapter < 1)
+		{
+			book--;
+			if (book < 1) return null;
+			chapter = BOOK_SIZES[book - 1];
+		}
+		else if (chapter > BOOK_SIZES[book - 1])
+		{
+			book++;
+			if (book > MAX_BOOK_COUNT) return null;
+			chapter = 1;
+		}
+
+		var obj = Instantiate(pref_content, inst_scroll.content);
+		var panel = obj.GetComponent<ReaderContentPanelBehaviour>();
+
+		panel.Init(BuildChapterText(book, chapter), book, chapter);
+		return panel;
 	}
 
-	private string BuildChapter(int book, int chapter)
+	private Transform CreateNewBookTitle(int book)
+	{
+		var obj = Instantiate(pref_title, inst_scroll.content);
+		var text = obj.GetComponent<TextMeshProUGUI>();
+
+		text.text = BOOK_NAMES[book - 1];
+		return obj.transform;
+	}
+
+	private string BuildChapterText(int book, int chapter)
 	{
 		return BuildVerseRange(GetLineIndex(book, chapter), GetChapterLength(book, chapter));
 	}
@@ -146,11 +238,11 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		var result = string.Empty;
 
-		var char_start = NthIndexOf(local_translation_lut, SEP, line - (VERSE_OFFSET + 1));
+		var char_start = CHAPTER_LOCATIONS[GetLocation_Chapter(line) - 1];
 		for (var i = 0; i < length - 1; i++)
 		{
 			var char_end = local_translation_lut.IndexOf(SEP, char_start);
-			result += $" {GetRichVerse(GetLocation_Verse(line + i))}{local_translation_lut.Substring(char_start, char_end - char_start)}";
+			result += $" {GetRichVerseNumber(GetLocation_Verse(line + i))}{local_translation_lut.Substring(char_start, char_end - char_start)}";
 			char_start = char_end + 1;
 		}
 
@@ -159,19 +251,9 @@ public class BibleReader : UdonSharpBehaviour
 
 	private int GetLineIndex(int book, int chapter, int verse = 1)
 	{
-		var search_string = GetSearchString(book, chapter, verse);
+		var search_string = GetLocation_String(book, chapter, verse);
 		var char_index = local_verse_lut.IndexOf(search_string);
-		return CountOfChar(local_verse_lut, SEP, char_index);
-	}
-
-	private string GetSearchString(int book, int chapter, int verse = 1)
-	{
-		return book.ToString("00") + chapter.ToString("000") + verse.ToString("000");
-	}
-	private string GetSearchString(int line)
-	{
-		var char_start = NthIndexOf(local_verse_lut, '\n', line - (VERSE_OFFSET + 1));
-		return local_verse_lut.Substring(char_start, 8);
+		return GetLutLine(char_index);
 	}
 
 	private int GetChapterLength(int book, int chapter)
@@ -185,28 +267,17 @@ public class BibleReader : UdonSharpBehaviour
 		return i - start + 1;
 	}
 
-	private int GetLocation_Book(int line)
-	{
-		var char_start = NthIndexOf(local_verse_lut, SEP, line - 1);
-		return int.Parse(local_verse_lut.Substring(char_start, 2));
-	}
+	private string GetLocation_String(int book, int chapter, int verse = 1) => book.ToString("00") + chapter.ToString("000") + verse.ToString("000");
+	private string GetLocation_String(int line) => local_verse_lut.Substring(GetLutLocation(line), LUT_REF_LENGTH);
 
-	private int GetLocation_Chapter(int line)
-	{
-		var char_start = NthIndexOf(local_verse_lut, SEP, line - 1);
-		return int.Parse(local_verse_lut.Substring(char_start + 2, 3));
-	}
+	private int GetLocation_Book(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line), 2));
+	private int GetLocation_Chapter(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line) + 2, 3));
+	private int GetLocation_Verse(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line) + 5, 3));
 
-	private int GetLocation_Verse(int line)
-	{
-		var char_start = NthIndexOf(local_verse_lut, SEP, line - 1);
-		return int.Parse(local_verse_lut.Substring(char_start + 5, 3));
-	}
+	private int GetLutLocation(int line) => (line - 1) * (LUT_REF_LENGTH + 1);
+	private int GetLutLine(int location) => (location / (LUT_REF_LENGTH + 1)) + 1;
 
-	private static string GetRichVerse(int verse)
-	{
-		return $"<sup>{verse}</sup>";
-	}
+	private static string GetRichVerseNumber(int index) => $"<sup>{index}</sup>";
 
 	private static int NthIndexOf(in string sample, char c, int count)
 	{

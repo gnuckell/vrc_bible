@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 7749023820419811878}
   - component: {fileID: 7822090211707715260}
   m_Layer: 0
-  m_Name: reader_chapter_group
+  m_Name: reader_content_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,6 +381,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7822090211707715260}
+  chapter_text: {fileID: 6207936426053541081}
+  content_text: {fileID: 2975562193901867574}
+  book_index: 0
+  chapter_index: 0
 --- !u!114 &7822090211707715260
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,12 +4,12 @@ Leviticus,LEV,27
 Numbers,NUM,36
 Deuteronomy,DEU,34
 Joshua,JOSH,24
-Judges,JUDG,21
+Judges,JUD,21
 Ruth,RUTH,4
 1 Samuel,1 SAM,31
 2 Samuel,2 SAM,24
-1 Kings,1 KING,22
-2 Kings,2 KING,25
+1 Kings,1 KNG,22
+2 Kings,2 KNG,25
 1 Chronicles,1 CHR,29
 2 Chronicles,2 CHR,36
 Ezra,EZRA,10
