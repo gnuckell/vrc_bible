@@ -21,7 +21,7 @@ public class BibleReader : UdonSharpBehaviour
 	/// <summary>
 	/// Total number of chapters in the Bible. Used to simplify reference indeces and quicken verse loading.
 	///</summary>
-	public const int MAX_CHAPTER_COUNT = 2000;
+	public const int MAX_CHAPTER_COUNT = 1191;
 
 	/// <summary>
 	/// Total number of verses in the entire Bible.
@@ -120,16 +120,30 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		local_translation_lut = data.text;
 
-		var b = 0;
 		var c = 0;
-		for (int v = 1; v < MAX_VERSE_COUNT; v++)
+		var abs_line = 1;
+		var local_book = 1;
+		var local_chapter = 0;
+		for (int abs_chapter = 1; abs_chapter <= CHAPTER_LOCATIONS.Length; abs_chapter++)
 		{
-			if (GetLocation_Chapter(v) == c && GetLocation_Book(v) == b) continue;
+			while (GetLocation_Book(abs_line) == local_book && GetLocation_ChapterLocal(abs_line) == local_chapter)
+			{
+				abs_line++;
+				c = local_translation_lut.IndexOf(SEP, c) + 1;
+			}
 
-			CHAPTER_LOCATIONS[c] = NthIndexOf(local_translation_lut, SEP, v - 1);
-			b++;
-			c++;
+			local_book = GetLocation_Book(abs_line);
+			local_chapter = GetLocation_ChapterLocal(abs_line);
+
+			CHAPTER_LOCATIONS[abs_chapter - 1] = c;
 		}
+
+		Debug.Log($"[0]={CHAPTER_LOCATIONS[0]}");
+		Debug.Log($"[1]={CHAPTER_LOCATIONS[1]}");
+		Debug.Log($"[1188]={CHAPTER_LOCATIONS[1188]}");
+
+		Debug.Log($"[1]={GetLocation_ChapterGlobal(1)}");
+		Debug.Log($"[31084]={GetLocation_ChapterGlobal(31084)}");
 	}
 
 	public void OnScrollValueChanged()
@@ -238,7 +252,9 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		var result = string.Empty;
 
-		var char_start = CHAPTER_LOCATIONS[GetLocation_Chapter(line) - 1];
+		var global = GetLocation_ChapterGlobal(line);
+		Debug.Log($"Looking for book {GetLocation_Book(line)}, chapter {GetLocation_ChapterLocal(line)}, Global chapter found: {global}");
+		var char_start = CHAPTER_LOCATIONS[global];
 		for (var i = 0; i < length - 1; i++)
 		{
 			var char_end = local_translation_lut.IndexOf(SEP, char_start);
@@ -263,16 +279,26 @@ public class BibleReader : UdonSharpBehaviour
 		do
 		{
 			i++;
-		} while (GetLocation_Chapter(i) == chapter);
+		} while (GetLocation_ChapterLocal(i) == chapter);
 		return i - start + 1;
+
+		// use CHAPTER_LENGTHS[i];
 	}
 
 	private string GetLocation_String(int book, int chapter, int verse = 1) => book.ToString("00") + chapter.ToString("000") + verse.ToString("000");
 	private string GetLocation_String(int line) => local_verse_lut.Substring(GetLutLocation(line), LUT_REF_LENGTH);
 
 	private int GetLocation_Book(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line), 2));
-	private int GetLocation_Chapter(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line) + 2, 3));
+	private int GetLocation_ChapterGlobal(int line)
+	{
+		var result = GetLocation_ChapterLocal(line) - 1;
+		for (var book = GetLocation_Book(line) - 1; book > 0; book--)
+			result += BOOK_SIZES[book - 1];
+		return result;
+	}
+	private int GetLocation_ChapterLocal(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line) + 2, 3));
 	private int GetLocation_Verse(int line) => int.Parse(local_verse_lut.Substring(GetLutLocation(line) + 5, 3));
+
 
 	private int GetLutLocation(int line) => (line - 1) * (LUT_REF_LENGTH + 1);
 	private int GetLutLine(int location) => (location / (LUT_REF_LENGTH + 1)) + 1;
