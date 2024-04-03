@@ -7,18 +7,32 @@ using VRC.Udon;
 
 public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 {
-	[SerializeField] public TextMeshProUGUI chapter_text;
-	[SerializeField] public TextMeshProUGUI content_text;
+	[SerializeField] private GameObject pref_book_title_text;
+	[SerializeField] private GameObject pref_chapter_title_text;
+	[SerializeField] private GameObject pref_content_text;
 
-	public int book_index = 0;
+	private TextMeshProUGUI book_title_text;
+	private TextMeshProUGUI chapter_title_text;
+	private TextMeshProUGUI content_text;
+
 	public int chapter_index = 0;
 
-	public void Init(string text, int book, int chapter)
-	{
-		book_index = book;
-		chapter_index = chapter;
+	private BibleReader host;
 
-		chapter_text.text = $"Chapter {chapter}";
-		content_text.text = text;
+	public void Init(BibleReader host, int chapt)
+	{
+		this.host = host;
+		chapter_index = chapt;
+
+		if (host.CHAPTER_LOCALS[chapt] == 0)
+		{
+			book_title_text = Instantiate(pref_book_title_text, transform).GetComponent<TextMeshProUGUI>();
+			book_title_text.text = $"{host.BOOK_NAMES[host.CHAPTER_BOOKS[chapt]]}";
+		}
+		chapter_title_text = Instantiate(pref_chapter_title_text, transform).GetComponent<TextMeshProUGUI>();
+		chapter_title_text.text = $"Chapter {host.CHAPTER_LOCALS[chapt] + 1}";
+
+		content_text = Instantiate(pref_content_text, transform).GetComponent<TextMeshProUGUI>();
+		content_text.text = host.CreateChapterText(chapt);
 	}
 }

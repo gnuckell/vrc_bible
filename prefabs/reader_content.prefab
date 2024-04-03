@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8356492537502287755
+--- !u!1 &853371164929218159
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6909101066110532841}
-  - component: {fileID: 8704888229837624244}
-  - component: {fileID: 3722302558914234844}
+  - component: {fileID: 3367807597667260602}
+  - component: {fileID: 7853737594163307086}
+  - component: {fileID: 1772275297442079156}
   m_Layer: 0
-  m_Name: reader_book_title
+  m_Name: reader_content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6909101066110532841
+--- !u!224 &3367807597667260602
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8356492537502287755}
+  m_GameObject: {fileID: 853371164929218159}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,21 +37,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!222 &8704888229837624244
+--- !u!222 &7853737594163307086
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8356492537502287755}
+  m_GameObject: {fileID: 853371164929218159}
   m_CullTransparentMesh: 1
---- !u!114 &3722302558914234844
+--- !u!114 &1772275297442079156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8356492537502287755}
+  m_GameObject: {fileID: 853371164929218159}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -65,10 +65,24 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Genesis
+  m_text: '<sup>1</sup>In the beginning God created the heaven and the earth. <sup>2</sup>And
+    the earth was without form, and void; and darkness was upon the face of the deep.
+    And the Spirit of God moved upon the face of the waters. <sup>3</sup>And God
+    said, Let there be light: and there was light. <sup>4</sup>And God saw the light,
+    that it was good: and God divided the light from the darkness. <sup>5</sup>And
+    God called the light Day, and the darkness he called Night. And the evening and
+    the morning were the first day. <sup>6</sup>And God said, Let there be a firmament
+    in the midst of the waters, and let it divide the waters from the waters. <sup>7</sup>And
+    God made the firmament, and divided the waters which were under the firmament
+    from the waters which were above the firmament: and it was so. <sup>8</sup>And
+    God called the firmament Heaven. And the evening and the morning were the second
+    day. <sup>9</sup>And God said, Let the waters under the heaven be gathered together
+    unto one place, and let the dry land appear: and it was so. <sup>10</sup>And
+    God called the dry land Earth; and the gathering together of the waters called
+    he Seas: and God saw that it was good.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54686ff3b72e42b469482358e9220fa2, type: 2}
-  m_sharedMaterial: {fileID: -7751934796014919776, guid: 54686ff3b72e42b469482358e9220fa2,
+  m_fontAsset: {fileID: 11400000, guid: 19f469d7957528547a2a211d888e51fd, type: 2}
+  m_sharedMaterial: {fileID: 9160857240758274061, guid: 19f469d7957528547a2a211d888e51fd,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -93,23 +107,23 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 42
+  m_fontSize: 28
+  m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 40
   m_fontSizeMax: 72
-  m_fontStyle: 17
-  m_HorizontalAlignment: 2
+  m_fontStyle: 0
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: -4
-  m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_wordSpacing: 2
+  m_lineSpacing: -15
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
