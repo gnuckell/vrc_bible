@@ -37,12 +37,14 @@ public class BibleReader : UdonSharpBehaviour
 
 	[SerializeField] private GameObject pref_content;
 
+	[SerializeField] private BibleHost inst_host;
+
 	[SerializeField] public int trans_index;
 
 	#endregion
 	#region Pinions
 
-	private ScrollRect inst_scroll;
+	private ScrollRect inst_scrollview;
 
 	private bool prox_is_awaiting_scroll_head;
 	private float prox_preheight_scroll_head;
@@ -62,6 +64,7 @@ public class BibleReader : UdonSharpBehaviour
 
 	private ReaderContentPanelBehaviour inst_content_head;
 	private ReaderContentPanelBehaviour inst_content_tail;
+	private ReaderContentPanelBehaviour inst_content_focused;
 
 	public int chapt_index = 0;
 
@@ -74,7 +77,7 @@ public class BibleReader : UdonSharpBehaviour
 
 	void Start()
 	{
-		inst_scroll = GetComponent<ScrollRect>();
+		inst_scrollview = GetComponent<ScrollRect>();
 
 		book_lut = book_doc.text;
 
@@ -126,6 +129,18 @@ public class BibleReader : UdonSharpBehaviour
 
 		inst_content_head = CreateChapterContent(chapt_index);
 		inst_content_tail = inst_content_head;
+		inst_content_focused = inst_content_head;
+	}
+
+	void Update()
+	{
+		if (prox_is_awaiting_scroll_head)
+			OnScrollPastHeadActually();
+
+		/** <<============================================================>> **/
+
+		var focus = CalculateFocusedChild();
+		if (focus != inst_content_focused) SetFocusedChild(focus);
 	}
 
 	public void SwitchTranslation(int index)
@@ -143,15 +158,9 @@ public class BibleReader : UdonSharpBehaviour
 
 	private void Clear()
 	{
-		var length = inst_scroll.content.childCount;
+		var length = inst_scrollview.content.childCount;
 		for (var i = 0; i < length; i++)
-			Destroy(inst_scroll.content.GetChild(i).gameObject);
-	}
-
-	void Update()
-	{
-		if (prox_is_awaiting_scroll_head)
-			OnScrollPastHeadActually();
+			Destroy(inst_scrollview.content.GetChild(i).gameObject);
 	}
 
 	#endregion
@@ -162,13 +171,16 @@ public class BibleReader : UdonSharpBehaviour
 	private bool AddressesShareBook(string a, string b) => a.Substring(0, 2) == b.Substring(0, 2);
 	private bool AddressesShareChapter(string a, string b) => a.Substring(0, 5) == b.Substring(0, 5);
 
+	private ReaderContentPanelBehaviour GetNextContent(ReaderContentPanelBehaviour inst) => inst_scrollview.content.GetChild(GetChildIndex(inst_scrollview.content, inst.transform) + 1).GetComponent<ReaderContentPanelBehaviour>();
+	private ReaderContentPanelBehaviour GetPrevContent(ReaderContentPanelBehaviour inst) => inst_scrollview.content.GetChild(GetChildIndex(inst_scrollview.content, inst.transform) - 1).GetComponent<ReaderContentPanelBehaviour>();
+
 	#endregion
 	#region Scroll Events
 
 	public void OnScrollValueChanged()
 	{
-		if (inst_scroll.verticalNormalizedPosition > 1f) OnScrollPastHead();
-		else if (inst_scroll.verticalNormalizedPosition < 0f) OnScrollPastTail();
+		if (inst_scrollview.verticalNormalizedPosition > 1f) OnScrollPastHead();
+		else if (inst_scrollview.verticalNormalizedPosition < 0f) OnScrollPastTail();
 	}
 
 	private void OnScrollPastHead()
@@ -188,17 +200,17 @@ public class BibleReader : UdonSharpBehaviour
 		}
 
 		inst_content_head = content;
-		inst_scroll.enabled = false;
+		inst_scrollview.enabled = false;
 	}
 
 	private void OnScrollPastHeadActually()
 	{
 		var post_height = GetCalculatedContentHeight();
 
-		var fake_scroll_y = inst_scroll.verticalScrollbar.value;
+		var fake_scroll_y = inst_scrollview.verticalNormalizedPosition;
 		var scroll_y = fake_scroll_y / (post_height / prox_preheight_scroll_head);
-		inst_scroll.verticalNormalizedPosition = scroll_y;
-		inst_scroll.enabled = true;
+		inst_scrollview.verticalNormalizedPosition = scroll_y;
+		inst_scrollview.enabled = true;
 		prox_is_awaiting_scroll_head = false;
 	}
 
@@ -219,7 +231,44 @@ public class BibleReader : UdonSharpBehaviour
 
 	private float GetCalculatedContentHeight()
 	{
-		return inst_scroll.content.rect.height;
+		return inst_scrollview.content.rect.height;
+	}
+
+	private void SetFocusedChild(ReaderContentPanelBehaviour inst)
+	{
+		inst_content_focused = inst;
+		Debug.Log($"Set focused child to {inst}");
+
+		// Update button texts, etc.
+	}
+
+	private ReaderContentPanelBehaviour CalculateFocusedChild()
+	{
+		for (int i = inst_scrollview.content.childCount - 1; i >= 0; i--)
+		{
+			var iChild = (RectTransform)inst_scrollview.content.GetChild(i);
+			var iPosition = 1f + (iChild.anchoredPosition.y / inst_scrollview.content.rect.height);
+			if (inst_scrollview.verticalNormalizedPosition < iPosition)
+				return iChild.GetComponent<ReaderContentPanelBehaviour>();
+		}
+		return inst_content_focused;
+	}
+
+	private bool IsFocusedInScrollView(RectTransform rect)
+	{
+		return true;
+	}
+
+	private float GetNormalizedPositionInScrollView(RectTransform rect)
+	{
+		var height = 0f;
+		for (int i = 0; i < inst_scrollview.content.childCount; i++)
+		{
+			var iChild = (RectTransform)inst_scrollview.content.GetChild(i);
+			if (iChild == rect) break;
+			height += iChild.rect.height;
+		}
+		return 1f - (height / inst_scrollview.content.rect.height);
 	}
 
 	#endregion
@@ -229,7 +278,7 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		if (chapt < 0 || chapt >= MAX_CHAPTER_COUNT) return null;
 
-		var obj = Instantiate(pref_content, inst_scroll.content);
+		var obj = Instantiate(pref_content, inst_scrollview.content);
 		var panel = obj.GetComponent<ReaderContentPanelBehaviour>();
 
 		panel.Init(this, chapt);
@@ -254,6 +303,13 @@ public class BibleReader : UdonSharpBehaviour
 	#region Statics
 
 	private static string GetRichVerseNumber(int index) => $"<sup>{index + 1}</sup>";
+
+	private static int GetChildIndex(Transform a, Transform b)
+	{
+		for (int i = 0; i < a.childCount; i++)
+			if (a.GetChild(i) == b) return i;
+		return -1;
+	}
 
 	private static int NthIndexOf(in string sample, char c, int n, int startIndex = 0)
 	{
