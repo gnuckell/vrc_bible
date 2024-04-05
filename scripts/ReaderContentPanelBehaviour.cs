@@ -17,22 +17,22 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 
 	public int chapter_index = 0;
 
-	private BibleReader host;
+	private BibleReader inst_reader;
 
-	public void Init(BibleReader host, int chapt)
+	public void Init(BibleReader reader, int chapt)
 	{
-		this.host = host;
+		inst_reader = reader;
 		chapter_index = chapt;
 
-		if (host.CHAPTER_LOCALS[chapt] == 0)
+		if (reader.CHAPTER_LOCALS[chapt] == 0)
 		{
 			book_title_text = Instantiate(pref_book_title_text, transform).GetComponent<TextMeshProUGUI>();
-			book_title_text.text = $"{host.BOOK_NAMES[host.CHAPTER_BOOKS[chapt]]}";
+			book_title_text.text = $"{reader.BOOK_NAMES[reader.CHAPTER_BOOKS[chapt]]}";
 		}
 		chapter_title_text = Instantiate(pref_chapter_title_text, transform).GetComponent<TextMeshProUGUI>();
-		chapter_title_text.text = $"Chapter {host.CHAPTER_LOCALS[chapt] + 1}";
+		chapter_title_text.text = $"Chapter {reader.CHAPTER_LOCALS[chapt] + 1}";
 
 		content_text = Instantiate(pref_content_text, transform).GetComponent<TextMeshProUGUI>();
-		content_text.text = host.CreateChapterText(chapt);
+		content_text.text = reader.CreateChapterText(chapt);
 	}
 }

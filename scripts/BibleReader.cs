@@ -37,7 +37,7 @@ public class BibleReader : UdonSharpBehaviour
 
 	[SerializeField] private GameObject pref_content;
 
-	[SerializeField] private BibleHost inst_host;
+	[SerializeField] private BibleHost host;
 
 	[SerializeField] public int trans_index;
 
@@ -55,18 +55,28 @@ public class BibleReader : UdonSharpBehaviour
 
 	public readonly string[] BOOK_NAMES = new string[MAX_BOOK_COUNT];
 	public readonly string[] BOOK_ABBRS = new string[MAX_BOOK_COUNT];
+	public readonly int[] BOOK_LENGTHS = new int[MAX_BOOK_COUNT];
+	public readonly int[] BOOK_HEADS = new int[MAX_BOOK_COUNT];
 
 	public readonly int[] CHAPTER_LOCALS = new int[MAX_CHAPTER_COUNT];
 	public readonly int[] CHAPTER_BOOKS = new int[MAX_CHAPTER_COUNT];
 	public readonly int[] CHAPTER_LENGTHS = new int[MAX_CHAPTER_COUNT];
+	private readonly int[] CHAPTER_HEADS = new int[MAX_CHAPTER_COUNT];
 
-	private readonly int[] CHAPTER_HEAD_INDECES = new int[MAX_CHAPTER_COUNT];
 
-	private ReaderContentPanelBehaviour inst_content_head;
-	private ReaderContentPanelBehaviour inst_content_tail;
-	private ReaderContentPanelBehaviour inst_content_focused;
+	private ReaderContentPanelBehaviour content_head;
+	private ReaderContentPanelBehaviour content_tail;
+	private ReaderContentPanelBehaviour _content_focused;
+	private ReaderContentPanelBehaviour content_focused
+	{
+		get => _content_focused;
+		set
+		{
+			_content_focused = value;
+			host.chapter_index = value.chapter_index;
+		}
+	}
 
-	public int chapt_index = 0;
 
 	#endregion
 	#region Properties
@@ -81,6 +91,7 @@ public class BibleReader : UdonSharpBehaviour
 
 		book_lut = book_doc.text;
 
+		var head = 0;
 		for (var i = 0; i < MAX_BOOK_COUNT; i++)
 		{
 			var line_start = NthIndexOf(book_lut, SEP, i - 1);
@@ -88,11 +99,15 @@ public class BibleReader : UdonSharpBehaviour
 
 			var line = book_lut.Substring(line_start, line_end - line_start);
 
-			var name_char = NthIndexOf(line, ',', 0);
-			var abbr_char = NthIndexOf(line, ',', 1);
+			var name_tail = NthIndexOf(line, ',', 0);
+			var abbr_tail = NthIndexOf(line, ',', 1);
 
-			BOOK_NAMES[i] = line.Substring(0, name_char - 1);
-			BOOK_ABBRS[i] = line.Substring(name_char, abbr_char - name_char - 1);
+			BOOK_NAMES[i] = line.Substring(0, name_tail - 1);
+			BOOK_ABBRS[i] = line.Substring(name_tail, abbr_tail - name_tail - 1);
+			BOOK_LENGTHS[i] = int.Parse(line.Substring(abbr_tail));
+			BOOK_HEADS[i] = head;
+
+			head += BOOK_LENGTHS[i];
 		}
 
 		address_lut = address_doc.text;
@@ -109,7 +124,7 @@ public class BibleReader : UdonSharpBehaviour
 			do j++; while (AddressesShareChapter(v_address, GetAddress(v + j)));
 
 			CHAPTER_LENGTHS[i] = j;
-			CHAPTER_HEAD_INDECES[i] = h;
+			CHAPTER_HEADS[i] = h;
 
 			h = NthIndexOf(trans_lut, SEP, j - 1, h);
 			v += j;
@@ -125,11 +140,7 @@ public class BibleReader : UdonSharpBehaviour
 			}
 		}
 
-		Clear();
-
-		inst_content_head = CreateChapterContent(chapt_index);
-		inst_content_tail = inst_content_head;
-		inst_content_focused = inst_content_head;
+		Reset();
 	}
 
 	void Update()
@@ -140,20 +151,32 @@ public class BibleReader : UdonSharpBehaviour
 		/** <<============================================================>> **/
 
 		var focus = CalculateFocusedChild();
-		if (focus != inst_content_focused) SetFocusedChild(focus);
+		if (focus != _content_focused) content_focused = focus;
 	}
 
 	public void SwitchTranslation(int index)
 	{
 		trans_index = index;
-		trans_lut = trans_doc[trans_index].text;
+		trans_lut = host.translation_docs[trans_index].text;
 
 		var start = 0;
 		for (var i = 0; i < MAX_CHAPTER_COUNT; i++)
 		{
-			CHAPTER_HEAD_INDECES[i] = start;
+			CHAPTER_HEADS[i] = start;
 			start = NthIndexOf(trans_lut, SEP, CHAPTER_LENGTHS[i], start);
 		}
+
+		Reset();
+	}
+
+	public void Reset() => Reset(host.chapter_index);
+	public void Reset(int chapt)
+	{
+		Clear();
+
+		content_head = CreateChapterContent(chapt);
+		content_tail = content_head;
+		SetFocusedChild(content_head);
 	}
 
 	private void Clear()
@@ -165,6 +188,8 @@ public class BibleReader : UdonSharpBehaviour
 
 	#endregion
 	#region Indexing
+
+	public int GetChapterFromLocals(int book, int chapter) => BOOK_HEADS[book] + chapter;
 
 	private string GetAddress(int line) => address_lut.Substring(line * (LUT_REF_LENGTH + 1), LUT_REF_LENGTH);
 
@@ -189,7 +214,7 @@ public class BibleReader : UdonSharpBehaviour
 		prox_is_awaiting_scroll_head = true;
 		prox_preheight_scroll_head = GetCalculatedContentHeight();
 
-		var content = CreateChapterContent(inst_content_head.chapter_index - 1);
+		var content = CreateChapterContent(content_head.chapter_index - 1);
 		if (content == null) return;
 
 		content.transform.SetAsFirstSibling();
@@ -199,7 +224,7 @@ public class BibleReader : UdonSharpBehaviour
 			// title.SetAsFirstSibling();
 		}
 
-		inst_content_head = content;
+		content_head = content;
 		inst_scrollview.enabled = false;
 	}
 
@@ -216,7 +241,7 @@ public class BibleReader : UdonSharpBehaviour
 
 	private void OnScrollPastTail()
 	{
-		var content = CreateChapterContent(inst_content_tail.chapter_index + 1);
+		var content = CreateChapterContent(content_tail.chapter_index + 1);
 		if (content == null) return;
 
 		if (content.chapter_index == 1)
@@ -226,7 +251,7 @@ public class BibleReader : UdonSharpBehaviour
 		}
 		content.transform.SetAsLastSibling();
 
-		inst_content_tail = content;
+		content_tail = content;
 	}
 
 	private float GetCalculatedContentHeight()
@@ -236,10 +261,8 @@ public class BibleReader : UdonSharpBehaviour
 
 	private void SetFocusedChild(ReaderContentPanelBehaviour inst)
 	{
-		inst_content_focused = inst;
-		Debug.Log($"Set focused child to {inst}");
-
-		// Update button texts, etc.
+		_content_focused = inst;
+		host.chapter_index = inst.chapter_index;
 	}
 
 	private ReaderContentPanelBehaviour CalculateFocusedChild()
@@ -251,7 +274,7 @@ public class BibleReader : UdonSharpBehaviour
 			if (inst_scrollview.verticalNormalizedPosition < iPosition)
 				return iChild.GetComponent<ReaderContentPanelBehaviour>();
 		}
-		return inst_content_focused;
+		return _content_focused;
 	}
 
 	private bool IsFocusedInScrollView(RectTransform rect)
@@ -289,7 +312,7 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		var result = string.Empty;
 
-		var char_head = CHAPTER_HEAD_INDECES[chapt];
+		var char_head = CHAPTER_HEADS[chapt];
 		for (var i = 0; i < CHAPTER_LENGTHS[chapt]; i++)
 		{
 			var char_end = trans_lut.IndexOf(SEP, char_head);

@@ -422,13 +422,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: host
+      Data: inst_reader
     - Name: $v
       Entry: 7
       Data: 22|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
-      Data: host
+      Data: inst_reader
     - Name: <UserType>k__BackingField
       Entry: 7
       Data: 23|System.RuntimeType, mscorlib
