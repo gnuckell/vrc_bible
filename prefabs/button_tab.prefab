@@ -252,8 +252,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: KJV
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 91b90cdbad5116844849ce81dc179c6d, type: 2}
-  m_sharedMaterial: {fileID: 7927034140784085788, guid: 91b90cdbad5116844849ce81dc179c6d,
+  m_fontAsset: {fileID: 11400000, guid: 15f90ea9b98154e45a4cc14ccff29c56, type: 2}
+  m_sharedMaterial: {fileID: 629414097866280527, guid: 15f90ea9b98154e45a4cc14ccff29c56,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -278,13 +278,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 17
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

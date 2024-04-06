@@ -81,8 +81,8 @@ MonoBehaviour:
     God called the dry land Earth; and the gathering together of the waters called
     he Seas: and God saw that it was good.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 19f469d7957528547a2a211d888e51fd, type: 2}
-  m_sharedMaterial: {fileID: 9160857240758274061, guid: 19f469d7957528547a2a211d888e51fd,
+  m_fontAsset: {fileID: 11400000, guid: 5530e17fc7a07ea43914c981b0de584d, type: 2}
+  m_sharedMaterial: {fileID: 2173308180506006179, guid: 5530e17fc7a07ea43914c981b0de584d,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 40
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: -4
   m_wordSpacing: 2
-  m_lineSpacing: -6
+  m_lineSpacing: 6
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
