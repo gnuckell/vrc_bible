@@ -24,13 +24,13 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 		inst_reader = reader;
 		chapter_index = chapt;
 
-		if (reader.CHAPTER_LOCALS[chapt] == 0)
+		if (reader.host.CHAPTER_LOCALS[chapt] == 0)
 		{
 			book_title_text = Instantiate(pref_book_title_text, transform).GetComponent<TextMeshProUGUI>();
-			book_title_text.text = $"{reader.BOOK_NAMES[reader.CHAPTER_BOOKS[chapt]]}";
+			book_title_text.text = $"{reader.host.BOOK_NAMES[reader.host.CHAPTER_BOOKS[chapt]]}";
 		}
 		chapter_title_text = Instantiate(pref_chapter_title_text, transform).GetComponent<TextMeshProUGUI>();
-		chapter_title_text.text = $"Chapter {reader.CHAPTER_LOCALS[chapt] + 1}";
+		chapter_title_text.text = $"Chapter {reader.host.CHAPTER_LOCALS[chapt] + 1}";
 
 		content_text = Instantiate(pref_content_text, transform).GetComponent<TextMeshProUGUI>();
 		content_text.text = reader.CreateChapterText(chapt);

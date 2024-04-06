@@ -13,5 +13,5 @@ public sealed class ChapterSelectorButton : Button
 		host.active_window_index = EBibleWindow.Reader;
 	}
 
-	protected override string GetButtonText(int index) => $"{host.reader.CHAPTER_LOCALS[index] + 1}";
+	protected override string GetButtonText(int index) => $"{host.CHAPTER_LOCALS[index] + 1}";
 }

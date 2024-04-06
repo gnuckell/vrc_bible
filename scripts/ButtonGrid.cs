@@ -35,7 +35,7 @@ public class ButtonGrid : UdonSharpBehaviour
 	{
 		Clear();
 
-		for (int i = 0; i < _max_rows; i++)
+		for (int i = 0; i < _max_rows && i * _max_buttons_in_row < max_buttons; i++)
 		{
 			var row = Instantiate(_pref_row, _row_parent).transform;
 			for (int j = 0; j < _max_buttons_in_row; j++)

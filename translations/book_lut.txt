@@ -48,7 +48,7 @@ Romans,ROM,16
 Galatians,GAL,6
 Ephesians,EPH,6
 Philippians,PHILS,4
-Colossians,COL,6
+Colossians,COL,4
 1 Thessalonians,1 THE,5
 2 Thessalonians,2 THE,3
 1 Timothy,1 TIM,6

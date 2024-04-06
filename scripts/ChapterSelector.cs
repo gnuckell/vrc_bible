@@ -15,11 +15,11 @@ public sealed class ChapterSelector : ButtonGrid
 
 	public override void Reset(int index)
 	{
-		var book = host.reader.CHAPTER_BOOKS[index];
-		max_buttons = host.reader.BOOK_LENGTHS[book];
+		var book = host.CHAPTER_BOOKS[index];
+		max_buttons = host.BOOK_LENGTHS[book];
 
 		base.Reset(book);
 	}
 
-	protected override int GetButtonIndex(int index, int local) => host.reader.GetChapterFromLocals(index, local);
+	protected override int GetButtonIndex(int index, int local) => host.GetChapterFromLocals(index, local);
 }

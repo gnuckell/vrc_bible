@@ -8,7 +8,7 @@ public sealed class TransButton : Button
 {
 	public override void OnClick()
 	{
-		host.reader.SwitchTranslation(index);
+		host.trans_index = index;
 		host.active_window_index = EBibleWindow.Reader;
 	}
 

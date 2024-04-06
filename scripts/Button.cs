@@ -12,7 +12,7 @@ public abstract class Button : UdonSharpBehaviour
 	private BibleHost _host;
 	public BibleHost host => _host;
 
-	private int _index;
+	public int _index;
 	public int index => _index;
 
 	public void Init(BibleHost host, int index)
