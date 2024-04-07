@@ -7,6 +7,8 @@ using VRC.Udon;
 
 public class BibleHost : UdonSharpBehaviour
 {
+	#region Constants
+
 	/// <summary>
 	/// Total number books in the Bible.
 	///</summary>
@@ -20,39 +22,25 @@ public class BibleHost : UdonSharpBehaviour
 	internal const int LUT_REF_LENGTH = 8;
 	internal const char SEP = '\n';
 
-	/** <<============================================================>> **/
-
-	[SerializeField] public string[] translation_names;
-	[SerializeField] public string[] translation_abbrs;
-	[SerializeField] public TextAsset[] translation_docs;
-	[SerializeField] private TextAsset book_doc;
-	[SerializeField] private TextAsset address_doc;
+	#endregion
+	#region Pinions
 
 	/** <<============================================================>> **/
+
+	public string trans_data_name;
+	public string trans_data_abbr;
+	public TextAsset trans_data_books;
+	public TextAsset trans_data_address;
+	public TextAsset trans_data_content;
+
+	public TransButton trans_default;
 
 	[SerializeField] private BibleReader _reader;
 	public BibleReader reader => _reader;
 
-	[SerializeField] private TextMeshProUGUI _chapter_text;
-	[SerializeField] private TextMeshProUGUI _book_text;
 	[SerializeField] private TextMeshProUGUI _trans_text;
-
-	[SerializeField] private int _trans_index = 0;
-	public int trans_index
-	{
-		get => _trans_index;
-		set
-		{
-			if (_trans_index == value) return;
-			_trans_index = value;
-			Refresh_trans_index();
-		}
-	}
-	private void Refresh_trans_index()
-	{
-		_trans_text.text = $"{translation_abbrs[_trans_index]}";
-		reader.SwitchTranslation(_trans_index);
-	}
+	[SerializeField] private TextMeshProUGUI _book_text;
+	[SerializeField] private TextMeshProUGUI _chapter_text;
 
 	[SerializeField] private int _chapter_index = 0;
 	public int chapter_index
@@ -89,22 +77,57 @@ public class BibleHost : UdonSharpBehaviour
 
 	private string book_lut;
 	private string address_lut;
+	private string _content_lut;
+	internal string content_lut { get => _content_lut; private set => _content_lut = value; }
 
-	public readonly string[] BOOK_NAMES = new string[MAX_BOOK_COUNT];
-	public readonly string[] BOOK_ABBRS = new string[MAX_BOOK_COUNT];
-	public readonly int[] BOOK_LENGTHS = new int[MAX_BOOK_COUNT];
-	public readonly int[] BOOK_HEADS = new int[MAX_BOOK_COUNT];
+	internal readonly string[] BOOK_NAMES = new string[MAX_BOOK_COUNT];
+	internal readonly string[] BOOK_ABBRS = new string[MAX_BOOK_COUNT];
+	internal readonly int[] BOOK_LENGTHS = new int[MAX_BOOK_COUNT];
+	internal readonly int[] BOOK_HEADS = new int[MAX_BOOK_COUNT];
 
-	public readonly int[] CHAPTER_LOCALS = new int[MAX_CHAPTER_COUNT];
-	public readonly int[] CHAPTER_BOOKS = new int[MAX_CHAPTER_COUNT];
-	public readonly int[] CHAPTER_LENGTHS = new int[MAX_CHAPTER_COUNT];
+	internal readonly int[] CHAPTER_LOCALS = new int[MAX_CHAPTER_COUNT];
+	internal readonly int[] CHAPTER_BOOKS = new int[MAX_CHAPTER_COUNT];
+	internal readonly int[] CHAPTER_LENGTHS = new int[MAX_CHAPTER_COUNT];
+	internal readonly int[] CHAPTER_HEADS = new int[MAX_CHAPTER_COUNT];
 
-	/** <<============================================================>> **/
+	#endregion
 
 	void Start()
 	{
-		book_lut = book_doc.text;
+		trans_default.UpdateHost();
+	}
 
+	public void Init(string name, string abbr, TextAsset books, TextAsset address, TextAsset content)
+	{
+		trans_data_name = name;
+		trans_data_abbr = abbr;
+		trans_data_books = books;
+		trans_data_address = address;
+		trans_data_content = content;
+
+		book_lut = trans_data_books.text;
+		address_lut = trans_data_address.text;
+		content_lut = trans_data_content.text;
+
+#if UNITY_EDITOR
+		/**	Validate files
+		*/
+		if (address_lut[8] == '\r')
+		{
+			Debug.LogError($"The address document '{trans_data_address.name}' uses CRLF line endings, please change to LF.");
+			return;
+		}
+		if (address_lut.Substring(address_lut.Length - LUT_REF_LENGTH, LUT_REF_LENGTH) != "00000000")
+		{
+			Debug.LogError($"The address document '{trans_data_address.name}' must end with a terminating string of zeroes ('00000000')");
+			return;
+		}
+#endif
+		/**	Make MAX_CHAPTER_COUNT a variable and set it here depending on the address doc?
+		*/
+
+		/**	Set indeces for each book.
+		*/
 		var head = 0;
 		for (var i = 0; i < MAX_BOOK_COUNT; i++)
 		{
@@ -124,21 +147,26 @@ public class BibleHost : UdonSharpBehaviour
 			head += BOOK_LENGTHS[i];
 		}
 
-		address_lut = address_doc.text;
-
+		/**	Set indeces for each chapter.
+		*/
 		var b = 0;
 		var l = 0;
 		var v = 0;
-		for (var i = 0; i < MAX_CHAPTER_COUNT; i++)
+		var h = 0;
+		for (var i = 0; i < CHAPTER_HEADS.Length; i++)
 		{
 			var v_address = GetAddress(v);
 			var j = 0;
 			do j++; while (AddressesShareChapter(v_address, GetAddress(v + j)));
 
-			CHAPTER_LENGTHS[i] = j;
 			CHAPTER_BOOKS[i] = b;
 			CHAPTER_LOCALS[i] = l;
+			CHAPTER_LENGTHS[i] = j;
+			CHAPTER_HEADS[i] = h;
 
+			// Debug.Log($"[{i}] book={b}, local={l}, length={j}, head={h}");
+
+			h = BibleUtils.NthIndexOf(content_lut, SEP, CHAPTER_LENGTHS[i] - 1, h);
 			v += j;
 			if (AddressesShareBook(v_address, GetAddress(v)))
 				l++;
@@ -149,13 +177,20 @@ public class BibleHost : UdonSharpBehaviour
 			}
 		}
 
-		reader.Init();
-		Refresh_trans_index();
+		_trans_text.text = trans_data_abbr;
 		Refresh_chapter_index();
+		reader.Init();
 		foreach (var obj in _window_object_list)
 			obj.SetActive(false);
 		_window_object_list[(int)_active_window_index].SetActive(true);
 	}
+
+	public void OnClose()
+	{
+		Destroy(gameObject);
+	}
+
+	/** <<============================================================>> **/
 
 	public int GetChapterFromLocals(int book, int chapter) => BOOK_HEADS[book] + chapter;
 	public string GetAddress(int line) => address_lut.Substring(line * (LUT_REF_LENGTH + 1), LUT_REF_LENGTH);
@@ -166,9 +201,9 @@ public class BibleHost : UdonSharpBehaviour
 
 public enum EBibleWindow
 {
-	Reader,
+	Settings,
 	TransSelector,
 	BookSelector,
 	ChapterSelector,
-	Settings,
+	Reader,
 }

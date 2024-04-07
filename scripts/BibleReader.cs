@@ -23,13 +23,8 @@ public class BibleReader : UdonSharpBehaviour
 	#endregion
 	#region Pinions
 
-
 	private bool prox_is_awaiting_scroll_head;
 	private float prox_preheight_scroll_head;
-
-	private string trans_lut;
-
-	private readonly int[] CHAPTER_HEADS = new int[BibleHost.MAX_CHAPTER_COUNT];
 
 	private ReaderContentPanelBehaviour content_head;
 	private ReaderContentPanelBehaviour content_tail;
@@ -56,7 +51,7 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		_scroll_rect = GetComponent<ScrollRect>();
 
-		SwitchTranslation(host.trans_index);
+		Reset();
 	}
 
 	void Update()
@@ -68,20 +63,6 @@ public class BibleReader : UdonSharpBehaviour
 
 		var focus = CalculateFocusedChild();
 		if (focus != _content_focused) content_focused = focus;
-	}
-
-	public void SwitchTranslation(int index)
-	{
-		trans_lut = host.translation_docs[index].text;
-
-		var start = 0;
-		for (var i = 0; i < CHAPTER_HEADS.Length; i++)
-		{
-			CHAPTER_HEADS[i] = start;
-			start = BibleUtils.NthIndexOf(trans_lut, BibleHost.SEP, host.CHAPTER_LENGTHS[i], start);
-		}
-
-		Reset();
 	}
 
 	public void Reset() => Reset(host.chapter_index);
@@ -128,12 +109,6 @@ public class BibleReader : UdonSharpBehaviour
 		if (content == null) return;
 
 		content.transform.SetAsFirstSibling();
-		if (content.chapter_index == 1)
-		{
-			// var title = CreateNewBookTitle(content.book_index);
-			// title.SetAsFirstSibling();
-		}
-
 		content_head = content;
 		_scroll_rect.enabled = false;
 	}
@@ -154,13 +129,7 @@ public class BibleReader : UdonSharpBehaviour
 		var content = CreateChapterContent(content_tail.chapter_index + 1);
 		if (content == null) return;
 
-		if (content.chapter_index == 1)
-		{
-			// var title = CreateNewBookTitle(content.book_index);
-			// title.SetAsLastSibling();
-		}
 		content.transform.SetAsLastSibling();
-
 		content_tail = content;
 	}
 
@@ -217,11 +186,11 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		var result = string.Empty;
 
-		var char_head = CHAPTER_HEADS[chapter];
+		var char_head = host.CHAPTER_HEADS[chapter];
 		for (var i = 0; i < host.CHAPTER_LENGTHS[chapter]; i++)
 		{
-			var char_end = trans_lut.IndexOf(BibleHost.SEP, char_head);
-			result += $" {GetRichVerseNumber(i)}{trans_lut.Substring(char_head, char_end - char_head)}";
+			var char_end = host.content_lut.IndexOf(BibleHost.SEP, char_head);
+			result += $" {GetRichVerseNumber(i)}{host.content_lut.Substring(char_head, char_end - char_head)}";
 			char_head = char_end + 1;
 		}
 		return result.Substring(1);

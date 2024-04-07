@@ -7,9 +7,9 @@ using VRC.Udon;
 
 public abstract class Button : UdonSharpBehaviour
 {
-	[SerializeField] private TextMeshProUGUI text;
+	[SerializeField] protected TextMeshProUGUI text;
 
-	private BibleHost _host;
+	[SerializeField] private BibleHost _host;
 	public BibleHost host => _host;
 
 	public int _index;
