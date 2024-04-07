@@ -27,11 +27,9 @@ public class BibleHost : UdonSharpBehaviour
 
 	/** <<============================================================>> **/
 
-	public string trans_data_name;
-	public string trans_data_abbr;
-	public TextAsset trans_data_books;
-	public TextAsset trans_data_address;
-	public TextAsset trans_data_content;
+	[Header("References")]
+
+	public GameObject close_object;
 
 	public TransButton trans_default;
 
@@ -41,6 +39,8 @@ public class BibleHost : UdonSharpBehaviour
 	[SerializeField] private TextMeshProUGUI _trans_text;
 	[SerializeField] private TextMeshProUGUI _book_text;
 	[SerializeField] private TextMeshProUGUI _chapter_text;
+
+	[Header("Settings")]
 
 	[SerializeField] private int _chapter_index = 0;
 	public int chapter_index
@@ -99,27 +99,21 @@ public class BibleHost : UdonSharpBehaviour
 
 	public void Init(string name, string abbr, TextAsset books, TextAsset address, TextAsset content)
 	{
-		trans_data_name = name;
-		trans_data_abbr = abbr;
-		trans_data_books = books;
-		trans_data_address = address;
-		trans_data_content = content;
-
-		book_lut = trans_data_books.text;
-		address_lut = trans_data_address.text;
-		content_lut = trans_data_content.text;
+		book_lut = books.text;
+		address_lut = address.text;
+		content_lut = content.text;
 
 #if UNITY_EDITOR
 		/**	Validate files
 		*/
 		if (address_lut[8] == '\r')
 		{
-			Debug.LogError($"The address document '{trans_data_address.name}' uses CRLF line endings, please change to LF.");
+			Debug.LogError($"The address document '{address.name}' uses CRLF line endings, please change to LF.");
 			return;
 		}
 		if (address_lut.Substring(address_lut.Length - LUT_REF_LENGTH, LUT_REF_LENGTH) != "00000000")
 		{
-			Debug.LogError($"The address document '{trans_data_address.name}' must end with a terminating string of zeroes ('00000000')");
+			Debug.LogError($"The address document '{address.name}' must end with a terminating string of zeroes ('00000000')");
 			return;
 		}
 #endif
@@ -177,7 +171,7 @@ public class BibleHost : UdonSharpBehaviour
 			}
 		}
 
-		_trans_text.text = trans_data_abbr;
+		_trans_text.text = abbr;
 		Refresh_chapter_index();
 		reader.Init();
 		foreach (var obj in _window_object_list)
@@ -187,7 +181,7 @@ public class BibleHost : UdonSharpBehaviour
 
 	public void OnClose()
 	{
-		Destroy(gameObject);
+		Destroy(close_object);
 	}
 
 	/** <<============================================================>> **/
