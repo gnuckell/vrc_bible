@@ -157,7 +157,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4372371854156716131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,11 +209,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8388543244694224073}
-  trans_data_name: English Standard Version
-  trans_data_abbr: ESV
-  trans_data_books: {fileID: 4900000, guid: 1926e9c7513ccdc42a1fcf58cd544e13, type: 3}
-  trans_data_address: {fileID: 4900000, guid: a9d693fcfc7e7754492232488c2f525e, type: 3}
-  trans_data_content: {fileID: 4900000, guid: a02273725aefe674294e231d0c79e86f, type: 3}
+  close_object: {fileID: 0}
   trans_default: {fileID: 3787539681165898708}
   _reader: {fileID: 7503804683257285096}
   _trans_text: {fileID: 9184556764453775945}
