@@ -23,6 +23,8 @@ public class BibleReader : UdonSharpBehaviour
 	#endregion
 	#region Pinions
 
+	[UdonSynced] private float synced_scroll_value;
+
 	private bool prox_is_awaiting_scroll_head;
 	private float prox_preheight_scroll_head;
 
@@ -65,6 +67,11 @@ public class BibleReader : UdonSharpBehaviour
 		if (focus != _content_focused) content_focused = focus;
 	}
 
+	public override void OnDeserialization()
+	{
+		_scroll_rect.verticalNormalizedPosition = synced_scroll_value;
+	}
+
 	public void Reset() => Reset(host.chapter_index);
 	public void Reset(int chapt)
 	{
@@ -97,6 +104,19 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		if (_scroll_rect.verticalNormalizedPosition > 1f) OnScrollPastHead();
 		else if (_scroll_rect.verticalNormalizedPosition < 0f) OnScrollPastTail();
+
+		if (!Networking.IsOwner(gameObject))
+		{
+			Networking.SetOwner(Networking.LocalPlayer, gameObject);
+		}
+
+		SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(SetNetworkScrollValue));
+	}
+
+	public void SetNetworkScrollValue()
+	{
+		synced_scroll_value = _scroll_rect.verticalNormalizedPosition;
+		_scroll_rect.verticalNormalizedPosition = synced_scroll_value;
 	}
 
 	private void OnScrollPastHead()
