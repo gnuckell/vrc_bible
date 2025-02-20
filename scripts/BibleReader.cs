@@ -209,7 +209,7 @@ public class BibleReader : UdonSharpBehaviour
 		var obj = Instantiate(pref_content, _scroll_rect.content);
 		var panel = obj.GetComponent<ReaderContentPanelBehaviour>();
 
-		panel.Init(this, chapter);
+		// panel.Init(this, chapter);
 		return panel;
 	}
 

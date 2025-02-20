@@ -17,11 +17,8 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 
 	public int chapter_index = 0;
 
-	private BibleReader inst_reader;
-
-	public void Init(BibleReader reader, int chapt)
+	public void Init(BibleReaderContent reader, int chapt)
 	{
-		inst_reader = reader;
 		chapter_index = chapt;
 
 		if (reader.host.CHAPTER_LOCALS[chapt] == 0)

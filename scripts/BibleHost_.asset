@@ -185,7 +185,7 @@ MonoBehaviour:
       Data: 11|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: BibleReader, Assembly-CSharp
+      Data: BibleReaderContent, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

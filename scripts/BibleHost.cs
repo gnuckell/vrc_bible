@@ -33,8 +33,8 @@ public class BibleHost : UdonSharpBehaviour
 
 	public TransButton trans_default;
 
-	[SerializeField] private BibleReader _reader;
-	public BibleReader reader => _reader;
+	[SerializeField] private BibleReaderContent _reader;
+	public BibleReaderContent reader => _reader;
 
 	[SerializeField] private TextMeshProUGUI _trans_text;
 	[SerializeField] private TextMeshProUGUI _book_text;
