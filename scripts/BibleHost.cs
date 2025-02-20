@@ -61,17 +61,27 @@ public class BibleHost : UdonSharpBehaviour
 	public int book_index => CHAPTER_BOOKS[_chapter_index];
 
 	[SerializeField] private GameObject[] _window_object_list;
-	[SerializeField] private EBibleWindow _active_window_index = EBibleWindow.BookSelector;
+	private EBibleWindow _active_window_index = EBibleWindow.BookSelector;
+	[UdonSynced] private EBibleWindow _active_window_index_SYNC = EBibleWindow.BookSelector;
 	public EBibleWindow active_window_index
 	{
-		get => _active_window_index;
+		get => _active_window_index_SYNC;
 		set
 		{
-			if (value == _active_window_index) return;
-			active_window.SetActive(false);
-			_active_window_index = value;
-			active_window.SetActive(true);
+			if (value == _active_window_index_SYNC) return;
+			_active_window_index_SYNC = value;
+			UpdateActiveWindowIndex();
+
+			Networking.SetOwner(Networking.LocalPlayer, gameObject);
+			RequestSerialization();
 		}
+	}
+	private void UpdateActiveWindowIndex()
+	{
+		if (_active_window_index_SYNC == _active_window_index) return;
+		active_window.SetActive(false);
+		_active_window_index = _active_window_index_SYNC;
+		active_window.SetActive(true);
 	}
 	public GameObject active_window => _window_object_list[(int)_active_window_index];
 
@@ -95,6 +105,11 @@ public class BibleHost : UdonSharpBehaviour
 	void Start()
 	{
 		trans_default.UpdateHost();
+	}
+
+	public override void OnDeserialization()
+	{
+		UpdateActiveWindowIndex();
 	}
 
 	public void Init(string name, string abbr, TextAsset books, TextAsset address, TextAsset content)

@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VRC.Core;
 using VRC.SDKBase;
@@ -11,6 +12,8 @@ using VRC.Udon;
 
 public class BibleReader : UdonSharpBehaviour
 {
+	const float SCROLL_ALPHA_SPEED = 5f;
+
 	#region Fields
 
 	[SerializeField] private GameObject pref_content;
@@ -23,7 +26,7 @@ public class BibleReader : UdonSharpBehaviour
 	#endregion
 	#region Pinions
 
-	[UdonSynced] private float synced_scroll_value;
+	[UdonSynced] private float _scroll_value_SYNC;
 
 	private bool prox_is_awaiting_scroll_head;
 	private float prox_preheight_scroll_head;
@@ -58,19 +61,31 @@ public class BibleReader : UdonSharpBehaviour
 
 	void Update()
 	{
+		if (Networking.IsOwner(gameObject))
+		{
+			_scroll_value_SYNC = _scroll_rect.verticalNormalizedPosition;
+		}
+		else
+		{
+			_scroll_rect.verticalNormalizedPosition = Mathf.Lerp(_scroll_rect.verticalNormalizedPosition, _scroll_value_SYNC, SCROLL_ALPHA_SPEED * Time.deltaTime);
+		}
+
 		if (prox_is_awaiting_scroll_head)
 			OnScrollPastHeadActually();
-
-		/** <<============================================================>> **/
 
 		var focus = CalculateFocusedChild();
 		if (focus != _content_focused) content_focused = focus;
 	}
 
-	public override void OnDeserialization()
-	{
-		_scroll_rect.verticalNormalizedPosition = synced_scroll_value;
-	}
+    public void OnScrollInitializePotentialDrag()
+    {
+		Networking.SetOwner(Networking.LocalPlayer, gameObject);
+    }
+
+	// public override void OnDeserialization()
+	// {
+	// 	_scroll_rect.verticalNormalizedPosition = _scroll_value_SYNC;
+	// }
 
 	public void Reset() => Reset(host.chapter_index);
 	public void Reset(int chapt)
@@ -105,19 +120,15 @@ public class BibleReader : UdonSharpBehaviour
 		if (_scroll_rect.verticalNormalizedPosition > 1f) OnScrollPastHead();
 		else if (_scroll_rect.verticalNormalizedPosition < 0f) OnScrollPastTail();
 
-		if (!Networking.IsOwner(gameObject))
-		{
-			Networking.SetOwner(Networking.LocalPlayer, gameObject);
-		}
-
-		SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(SetNetworkScrollValue));
+		// SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(SetNetworkScrollValue));
+		// _scroll_value_SYNC = _scroll_rect.verticalNormalizedPosition;
 	}
 
-	public void SetNetworkScrollValue()
-	{
-		synced_scroll_value = _scroll_rect.verticalNormalizedPosition;
-		_scroll_rect.verticalNormalizedPosition = synced_scroll_value;
-	}
+	// public void SetNetworkScrollValue()
+	// {
+	// 	_scroll_value_SYNC = _scroll_rect.verticalNormalizedPosition;
+	// 	_scroll_rect.verticalNormalizedPosition = _scroll_value_SYNC;
+	// }
 
 	private void OnScrollPastHead()
 	{
@@ -221,5 +232,5 @@ public class BibleReader : UdonSharpBehaviour
 
 	private static string GetRichVerseNumber(int index) => $"<sup>{index + 1}</sup>";
 
-	#endregion
+    #endregion
 }
