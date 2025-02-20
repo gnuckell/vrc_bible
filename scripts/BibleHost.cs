@@ -42,19 +42,26 @@ public class BibleHost : UdonSharpBehaviour
 
 	[Header("Settings")]
 
-	[SerializeField] private int _chapter_index = 0;
+	private int _chapter_index = 0;
+	[UdonSynced] private int _chapter_index_SYNC = 0;
 	public int chapter_index
 	{
 		get => _chapter_index;
 		set
 		{
-			if (value == _chapter_index) return;
-			_chapter_index = value;
-			Refresh_chapter_index();
+			if (value == _chapter_index_SYNC) return;
+			_chapter_index_SYNC = value;
+			UpdateChapterIndex();
+
+			Networking.SetOwner(Networking.LocalPlayer, gameObject);
+			RequestSerialization();
 		}
 	}
-	private void Refresh_chapter_index()
+	private void UpdateChapterIndex()
 	{
+		if (_chapter_index == _chapter_index_SYNC) return;
+		_chapter_index = _chapter_index_SYNC;
+
 		_chapter_text.text = $"{CHAPTER_LOCALS[_chapter_index] + 1}";
 		_book_text.text = $"{BOOK_ABBRS[book_index]}";
 	}
@@ -110,6 +117,7 @@ public class BibleHost : UdonSharpBehaviour
 	public override void OnDeserialization()
 	{
 		UpdateActiveWindowIndex();
+		UpdateChapterIndex();
 	}
 
 	public void Init(string name, string abbr, TextAsset books, TextAsset address, TextAsset content)
@@ -187,7 +195,7 @@ public class BibleHost : UdonSharpBehaviour
 		}
 
 		_trans_text.text = abbr;
-		Refresh_chapter_index();
+		UpdateChapterIndex();
 		reader.Init();
 		foreach (var obj in _window_object_list)
 			obj.SetActive(false);

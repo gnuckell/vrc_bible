@@ -25,7 +25,7 @@ public class BibleReaderContent : UdonSharpBehaviour
 		set
 		{
 			_content_focused = value;
-			host.chapter_index = value.chapter_index;
+			host.chapter_index = _content_focused.chapter_index;
 		}
 	}
 
@@ -43,12 +43,16 @@ public class BibleReaderContent : UdonSharpBehaviour
 
     public override void OnDeserialization()
     {
+        Reset();
+
+
         while (content_head.chapter_index != head_chapter_SYNC)
         {
             if (content_head.chapter_index < head_chapter_SYNC)
                 Destroy(transform.GetChild(0).gameObject);
             else
                 CreateContentAtHead();
+            content_head = transform.GetChild(0).GetComponent<ReaderContentPanelBehaviour>();
         }
         while (content_tail.chapter_index != tail_chapter_SYNC)
         {
@@ -56,15 +60,14 @@ public class BibleReaderContent : UdonSharpBehaviour
                 Destroy(transform.GetChild(transform.childCount - 1).gameObject);
             else
                 CreateContentAtTail();
+            content_tail = transform.GetChild(transform.childCount - 1).GetComponent<ReaderContentPanelBehaviour>();
         }
 
-        content_head = transform.GetChild(0).GetComponent<ReaderContentPanelBehaviour>();
-        content_tail = transform.GetChild(transform.childCount - 1).GetComponent<ReaderContentPanelBehaviour>();
     }
 
     public void OnEnable()
     {
-        // Reset();
+        Reset();
         // Sync();
     }
 
