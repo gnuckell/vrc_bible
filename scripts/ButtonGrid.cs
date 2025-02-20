@@ -10,6 +10,7 @@ public class ButtonGrid : UdonSharpBehaviour
 {
 	[SerializeField] private GameObject _pref_row;
 	[SerializeField] private GameObject _pref_button;
+	[SerializeField] private GameObject _pref_placeholder;
 
 	[SerializeField] private BibleHost _host;
 	public BibleHost host => _host;
@@ -35,17 +36,26 @@ public class ButtonGrid : UdonSharpBehaviour
 	{
 		Clear();
 
-		for (int i = 0; i < _max_rows && i * _max_buttons_in_row < max_buttons; i++)
+		RectTransform last_row = null;
+		for (int y = 0; y < _max_rows && y * _max_buttons_in_row < max_buttons; y++)
 		{
-			var row = Instantiate(_pref_row, _row_parent).transform;
-			for (int j = 0; j < _max_buttons_in_row; j++)
+			last_row = (RectTransform)Instantiate(_pref_row, _row_parent).transform;
+			for (int x = 0; x < _max_buttons_in_row; x++)
 			{
-				var ij = i * _max_buttons_in_row + j;
-				if (ij == max_buttons) return;
+				var xy = y * _max_buttons_in_row + x;
+				if (xy >= max_buttons) break;
 
-				var button = Instantiate(_pref_button, row).GetComponent<Button>();
-				button.Init(_host, GetButtonIndex(index, ij));
+				var button = Instantiate(_pref_button, last_row).GetComponent<Button>();
+				button.Init(_host, GetButtonIndex(index, xy));
 			}
+		}
+
+		if (last_row == null) return;
+
+		var remaining_slot_count = (_max_buttons_in_row - (last_row.childCount % _max_buttons_in_row)) % _max_buttons_in_row;
+		for (int x = 0; x < remaining_slot_count; x++)
+		{
+			Instantiate(_pref_placeholder, last_row);
 		}
 	}
 

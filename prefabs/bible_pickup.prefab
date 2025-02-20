@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 3626322993541596114}
   - component: {fileID: 4408135472373648636}
   - component: {fileID: 8076767558742622926}
+  - component: {fileID: 1079997340488114971}
   m_Layer: 13
   m_Name: bible_pickup
   m_TagString: Untagged
@@ -170,7 +171,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.1}
+  m_Size: {x: 0.667, y: 0.5, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4408135472373648636
 Rigidbody:
@@ -218,7 +219,7 @@ MonoBehaviour:
   allowManipulationWhenEquipped: 1
   orientation: 2
   AutoHold: 2
-  InteractionText: 
+  InteractionText: Bible
   UseText: 
   useEventBroadcastType: 0
   UseDownEventName: 
@@ -231,6 +232,19 @@ MonoBehaviour:
   currentlyHeldBy: {fileID: 0}
   pickupable: 1
   proximity: 3
+--- !u!114 &1079997340488114971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5651167850597063607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1783056023, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowCollisionOwnershipTransfer: 1
 --- !u!1001 &6025955164800197815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -322,22 +336,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: bible_ui
       objectReference: {fileID: 0}
+    - target: {fileID: 3044658255945919586, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3883129060313939091, guid: 2b075b75189982e4297abfcc2abc0039,
+        type: 2}
     - target: {fileID: 3787539681165898708, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 3787539681165898708, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
-    - target: {fileID: 3803311813038438128, guid: 99320beb0d8d89e478d0d9742acf91b5,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 720
-      objectReference: {fileID: 0}
-    - target: {fileID: 3803311813038438128, guid: 99320beb0d8d89e478d0d9742acf91b5,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 720
-      objectReference: {fileID: 0}
     - target: {fileID: 5436951315562019277, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -375,11 +385,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5772571465819554804, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
-    - target: {fileID: 6058259458842864357, guid: 99320beb0d8d89e478d0d9742acf91b5,
+    - target: {fileID: 6319937779689636397, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3883129060313939091, guid: 2b075b75189982e4297abfcc2abc0039,
+        type: 2}
     - target: {fileID: 6673538159518845360, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_AnchorMax.y

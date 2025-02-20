@@ -1628,6 +1628,8 @@ MonoBehaviour:
     type: 3}
   _pref_button: {fileID: 5006454146476475810, guid: 60b5bb7e926bd77459e35e333d642d1b,
     type: 3}
+  _pref_placeholder: {fileID: 3416884864120101249, guid: de4c827b8b4165046815f95807ddcf0e,
+    type: 3}
   _host: {fileID: 7517004354047287435}
   _row_parent: {fileID: 3864418338362235039}
   _max_rows: 22
@@ -2816,6 +2818,8 @@ MonoBehaviour:
   _pref_row: {fileID: 4826505800213578331, guid: 6c37269784bdeb74d930ee68899fbfff,
     type: 3}
   _pref_button: {fileID: 5006454146476475810, guid: 03045293237a33f4abcbb7854c43d9d3,
+    type: 3}
+  _pref_placeholder: {fileID: 3416884864120101249, guid: de4c827b8b4165046815f95807ddcf0e,
     type: 3}
   _host: {fileID: 7517004354047287435}
   _row_parent: {fileID: 7637636649928592543}
