@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Genesis
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 83417a8f1aea50d4a8ac65dd8d08505a, type: 2}
-  m_sharedMaterial: {fileID: 3598793982632061376, guid: 83417a8f1aea50d4a8ac65dd8d08505a,
+  m_fontAsset: {fileID: 11400000, guid: fa9d19bfaf012734fade9f2fabc01b98, type: 2}
+  m_sharedMaterial: {fileID: 7940738786792800753, guid: fa9d19bfaf012734fade9f2fabc01b98,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

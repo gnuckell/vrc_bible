@@ -130,12 +130,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 00d82d1f10c24c14fa3eec52bd799790,
-        type: 2}
-    - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
-        type: 3}
       propertyPath: m_fontColor.b
       value: 0.89411765
       objectReference: {fileID: 0}
@@ -154,12 +148,6 @@ PrefabInstance:
       propertyPath: m_fontSizeMax
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 3208706228405867135, guid: 00d82d1f10c24c14fa3eec52bd799790,
-        type: 2}
     - target: {fileID: 4599137043416438090, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
