@@ -17,13 +17,9 @@ public class SyncedScrollRect : UdonSharpBehaviour
     void Update()
     {
 		if (Networking.IsOwner(gameObject))
-		{
 			_scroll_value_SYNC = _scroll_rect.verticalNormalizedPosition;
-		}
 		else
-		{
 			_scroll_rect.verticalNormalizedPosition = Mathf.Lerp(_scroll_rect.verticalNormalizedPosition, _scroll_value_SYNC, SCROLL_ALPHA_SPEED * Time.deltaTime);
-		}
     }
 
     public void OnScrollInitializePotentialDrag()
@@ -33,23 +29,17 @@ public class SyncedScrollRect : UdonSharpBehaviour
 
 	public void OnScrollValueChanged()
 	{
-        if (!Networking.IsOwner(gameObject)) return;
+        if (!Networking.IsOwner(gameObject) || _bible_reader_content == null) return;
 
-		if (_scroll_rect.verticalNormalizedPosition > 1f) OnScrollPastHead();
-		else if (_scroll_rect.verticalNormalizedPosition < 0f) OnScrollPastTail();
+		if (_scroll_rect.verticalNormalizedPosition > 1f)
+        {
+            _bible_reader_content.CreateContentAtHead();
+            _bible_reader_content.Sync();
+        }
+		else if (_scroll_rect.verticalNormalizedPosition < 0f)
+        {
+            _bible_reader_content.CreateContentAtTail();
+            _bible_reader_content.Sync();
+        }
 	}
-
-    public void OnScrollPastHead() {
-        if (_bible_reader_content == null) return;
-        _bible_reader_content.CreateContentAtHead();
-        _bible_reader_content.head_chapter_SYNC = _bible_reader_content.content_head.chapter_index;
-        _bible_reader_content.Sync();
-    }
-
-    public void OnScrollPastTail() {
-        if (_bible_reader_content == null) return;
-        _bible_reader_content.CreateContentAtTail();
-        _bible_reader_content.tail_chapter_SYNC = _bible_reader_content.content_tail.chapter_index;
-        _bible_reader_content.Sync();
-    }
 }

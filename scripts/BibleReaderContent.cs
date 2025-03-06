@@ -43,26 +43,23 @@ public class BibleReaderContent : UdonSharpBehaviour
 
     public override void OnDeserialization()
     {
-        Reset();
+		if (head_chapter_SYNC <= content_head.chapter_index &&
+			tail_chapter_SYNC >= content_tail.chapter_index)
+		{
+			SyncExpandHead();
+			SyncExpandTail();
+		}
+		else // RESET
+		{
+			Clear();
 
+			content_head = CreateChapterContent(head_chapter_SYNC);
+			content_tail = content_head;
 
-        while (content_head.chapter_index != head_chapter_SYNC)
-        {
-            if (content_head.chapter_index < head_chapter_SYNC)
-                Destroy(transform.GetChild(0).gameObject);
-            else
-                CreateContentAtHead();
-            content_head = transform.GetChild(0).GetComponent<ReaderContentPanelBehaviour>();
-        }
-        while (content_tail.chapter_index != tail_chapter_SYNC)
-        {
-            if (content_tail.chapter_index > tail_chapter_SYNC)
-                Destroy(transform.GetChild(transform.childCount - 1).gameObject);
-            else
-                CreateContentAtTail();
-            content_tail = transform.GetChild(transform.childCount - 1).GetComponent<ReaderContentPanelBehaviour>();
-        }
+			SyncExpandTail();
 
+			content_focused = content_head;
+		}
     }
 
     public void OnEnable()
@@ -79,6 +76,8 @@ public class BibleReaderContent : UdonSharpBehaviour
     public void Sync()
     {
         Networking.SetOwner(Networking.LocalPlayer, gameObject);
+		head_chapter_SYNC = content_head.chapter_index;
+		tail_chapter_SYNC = content_tail.chapter_index;
         RequestSerialization();
     }
 
@@ -99,6 +98,8 @@ public class BibleReaderContent : UdonSharpBehaviour
 
 		_scroll_rect.verticalNormalizedPosition = 1f;
 		content_focused = content_head;
+
+		if (Networking.IsOwner(gameObject)) Sync();
 	}
 
     public void CreateContentAtHead()
@@ -134,6 +135,22 @@ public class BibleReaderContent : UdonSharpBehaviour
 
 		content.transform.SetAsLastSibling();
 		content_tail = content;
+	}
+
+	private void SyncExpandHead()
+	{
+        while (content_head.chapter_index != head_chapter_SYNC)
+        {
+			CreateContentAtHead();
+		}
+	}
+
+	private void SyncExpandTail()
+	{
+        while (content_tail.chapter_index != tail_chapter_SYNC)
+        {
+			CreateContentAtTail();
+		}
 	}
 
 
