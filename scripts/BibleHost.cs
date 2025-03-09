@@ -20,6 +20,7 @@ public class BibleHost : UdonSharpBehaviour
 	internal const int MAX_CHAPTER_COUNT = 1189;
 
 	internal const int LUT_REF_LENGTH = 8;
+	internal const int LUT_REF_PREFIX_LENGTH = 9;
 	internal const char SEP = '\n';
 
 	#endregion

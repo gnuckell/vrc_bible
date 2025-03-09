@@ -190,7 +190,7 @@ public class BibleReaderContent : UdonSharpBehaviour
 		for (var i = 0; i < host.CHAPTER_LENGTHS[chapter]; i++)
 		{
 			var char_end = host.content_lut.IndexOf(BibleHost.SEP, char_head);
-			result += $" {GetRichVerseNumber(i)}{host.content_lut.Substring(char_head, char_end - char_head)}";
+			result += $" {GetRichVerseNumber(i)}{host.content_lut.Substring(char_head + BibleHost.LUT_REF_PREFIX_LENGTH, char_end - (char_head + BibleHost.LUT_REF_PREFIX_LENGTH))}";
 			char_head = char_end + 1;
 		}
 		return result.Substring(1);
