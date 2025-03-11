@@ -7,13 +7,12 @@ using VRC.Udon;
 
 public class BiblePickup : UdonSharpBehaviour
 {
-	[SerializeField] private BibleHost host;
 	[SerializeField] private BibleOwner owner;
-	[SerializeField] private TextMeshProUGUI ownerNameLabel;
+	[SerializeField] private BibleSetting_VisibilityDropdown visibilityDropdown;
 
     public override void OnPickup()
     {
 		owner.ClaimLocal();
-		// host.TryClaim();
+		visibilityDropdown.OnValueChanged();
     }
 }

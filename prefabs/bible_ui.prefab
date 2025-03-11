@@ -360,6 +360,9 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 6278693814228929109}
   owner: {fileID: 285413011154042472}
   dropdown: {fileID: 792672372957594143}
+  canvas_object: {fileID: 2873813610789830230}
+  mesh_object: {fileID: 0}
+  prop_object: {fileID: 0}
 --- !u!114 &6278693814228929109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,9 +2127,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8161160625837215240}
-  visible_object: {fileID: 2873813610789830230}
-  ui_collider: {fileID: 3803311813038438128}
-  prop_collider: {fileID: 0}
 --- !u!114 &8161160625837215240
 MonoBehaviour:
   m_ObjectHideFlags: 0
