@@ -41,6 +41,8 @@ public class BibleHost : UdonSharpBehaviour
 	[SerializeField] private TextMeshProUGUI _book_text;
 	[SerializeField] private TextMeshProUGUI _chapter_text;
 
+	[SerializeField] private TabSelector _tab_selector;
+
 	[Header("Settings")]
 
 	private int _chapter_index = 0;
@@ -68,31 +70,11 @@ public class BibleHost : UdonSharpBehaviour
 	}
 	public int book_index => CHAPTER_BOOKS[_chapter_index];
 
-	[SerializeField] private GameObject[] _window_object_list;
-	private EBibleWindow _active_window_index = EBibleWindow.BookSelector;
-	[UdonSynced] private EBibleWindow _active_window_index_SYNC = EBibleWindow.BookSelector;
 	public EBibleWindow active_window_index
 	{
-		get => _active_window_index_SYNC;
-		set
-		{
-			if (value == _active_window_index_SYNC) return;
-			_active_window_index_SYNC = value;
-			UpdateActiveWindowIndex();
-
-			Networking.SetOwner(Networking.LocalPlayer, gameObject);
-			RequestSerialization();
-		}
+		get => (EBibleWindow)_tab_selector.current_index;
+		set => _tab_selector.current_index = (int)value;
 	}
-	private void UpdateActiveWindowIndex()
-	{
-		if (_active_window_index_SYNC == _active_window_index) return;
-		active_window.SetActive(false);
-		_active_window_index = _active_window_index_SYNC;
-		active_window.SetActive(true);
-	}
-	public GameObject active_window => _window_object_list[(int)_active_window_index];
-
 	private string book_lut;
 	private string address_lut;
 	private string _content_lut;
@@ -117,7 +99,6 @@ public class BibleHost : UdonSharpBehaviour
 
 	public override void OnDeserialization()
 	{
-		UpdateActiveWindowIndex();
 		UpdateChapterIndex();
 	}
 
@@ -198,9 +179,6 @@ public class BibleHost : UdonSharpBehaviour
 		_trans_text.text = abbr;
 		UpdateChapterIndex();
 		reader.Init();
-		foreach (var obj in _window_object_list)
-			obj.SetActive(false);
-		_window_object_list[(int)_active_window_index].SetActive(true);
 	}
 
 	public void OnClose()
