@@ -8,6 +8,8 @@ using VRC.Udon;
 
 public class BibleOwner : UdonSharpBehaviour
 {
+    [SerializeField] private Setting_Privacy privacy;
+
     [UdonSynced] private bool _has_been_claimed = false;
     // public bool has_been_claimed => _has_been_claimed;
 
@@ -38,6 +40,8 @@ public class BibleOwner : UdonSharpBehaviour
 
         Refresh();
         RequestSerialization();
+
+        privacy.Sync();
     }
 
     public void Unclaim()
