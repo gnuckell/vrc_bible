@@ -7,10 +7,22 @@ using VRC.Udon;
 
 public class BiblePickup : UdonSharpBehaviour
 {
-	[SerializeField] private BibleOwner owner;
+	[SerializeField] public BibleOwner owner;
 
-    public override void OnPickup()
-    {
+	// [UdonSynced] private VRCPlayerApi holder;
+
+    // public override void OnPickup()
+    // {
+	// 	holder = Networking.LocalPlayer;
+    // }
+
+    // public override void OnDrop()
+    // {
+	// 	holder = null;
+    // }
+
+    public void ClaimHolder()
+	{
 		owner.ClaimLocal();
-    }
+	}
 }

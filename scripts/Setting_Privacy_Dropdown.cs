@@ -11,16 +11,26 @@ public class Setting_Privacy_Dropdown : UdonSharpBehaviour
     [SerializeField] private Setting_Privacy privacy;
     [SerializeField] public TMP_Dropdown dropdown;
 
+	private int previous_value;
     public int value => dropdown.value;
 
     public override void OnDeserialization()
     {
         dropdown.SetValueWithoutNotify(privacy.level);
+		previous_value = dropdown.value;
     }
 
     public void OnValueChanged()
     {
-        owner.ClaimLocal();
+		if (owner.is_local_owner)
+		{
+	        owner.ClaimLocal();
+			previous_value = dropdown.value;
+		}
+		else
+		{
+			dropdown.SetValueWithoutNotify(previous_value);
+		}
     }
 
     public void Sync()

@@ -8,7 +8,7 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 {
     [SerializeField] private Transform spawn_transform;
     [SerializeField] private GameObject prefab_spawn;
-    private GameObject current_spawn;
+    private BiblePickup current_bible_pickup;
 
     void Start()
     {
@@ -18,12 +18,13 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject != current_spawn) return;
+        if (other.GetComponent<BiblePickup>() != current_bible_pickup) return;
+        current_bible_pickup.ClaimHolder();
         SpawnNewBible();
     }
 
     public void SpawnNewBible()
     {
-        current_spawn = Instantiate(prefab_spawn, spawn_transform.position, spawn_transform.rotation);
+        current_bible_pickup = Instantiate(prefab_spawn, spawn_transform.position, spawn_transform.rotation).GetComponent<BiblePickup>();
     }
 }
