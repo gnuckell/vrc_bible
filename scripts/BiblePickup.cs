@@ -9,20 +9,19 @@ public class BiblePickup : UdonSharpBehaviour
 {
 	[SerializeField] public BibleOwner owner;
 
-	// [UdonSynced] private VRCPlayerApi holder;
-
-    // public override void OnPickup()
-    // {
-	// 	holder = Networking.LocalPlayer;
-    // }
-
-    // public override void OnDrop()
-    // {
-	// 	holder = null;
-    // }
+	[HideInInspector] public BibleSpawnerExitZone spawner;
 
     public void ClaimHolder()
 	{
-		owner.ClaimLocal();
+		owner.Claim(Networking.GetOwner(gameObject));
+		// owner.ClaimLocal();
+	}
+
+	public void ReturnToSpawner()
+	{
+		if (!Networking.IsOwner(gameObject)) return;
+
+		owner.Unclaim();
+		spawner.ReturnUsedBible(gameObject);
 	}
 }

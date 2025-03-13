@@ -17,7 +17,14 @@ public class BibleOwner : UdonSharpBehaviour
     public bool is_unclaimed_or_owner => !_has_been_claimed || Networking.IsOwner(gameObject);
 
     public VRCPlayerApi owner => _has_been_claimed ? Networking.GetOwner(gameObject) : null;
-    public string label_text => owner != null ? $"[{owner.playerId}] {owner.displayName}" : "<none>";
+    // public string label_text => owner != null ? $"[{owner.playerId}] {owner.displayName}" : "<none>";
+    public string label_text => $"{pickup_name}: " + (owner != null ? $"[{owner.playerId}] {owner.displayName}" : "<none>");
+
+    private string pickup_name { get {
+        var pickup_parent = transform.parent.parent.GetComponent<BiblePickup>();
+        if (pickup_parent == null) return "<global>";
+        return pickup_parent.gameObject.name;
+    }}
 
     private TextMeshProUGUI _label;
 
@@ -33,10 +40,12 @@ public class BibleOwner : UdonSharpBehaviour
         Refresh();
     }
 
-    public void ClaimLocal()
+    public void ClaimLocal() => Claim(Networking.LocalPlayer);
+
+    public void Claim(VRCPlayerApi player)
     {
         _has_been_claimed = true;
-        Networking.SetOwner(Networking.LocalPlayer, gameObject);
+        Networking.SetOwner(player, gameObject);
 
         Refresh();
         RequestSerialization();
