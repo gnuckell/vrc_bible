@@ -97,6 +97,12 @@ public class BibleHost : UdonSharpBehaviour
 		trans_default.UpdateHost();
 	}
 
+	public void Despawn()
+	{
+		chapter_index = 0;
+		active_window_index = EBibleWindow.BookSelector;
+	}
+
 	public override void OnDeserialization()
 	{
 		UpdateChapterIndex();

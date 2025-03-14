@@ -6,8 +6,9 @@ using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon;
 
-public class BibleOwner : UdonSharpBehaviour
+public class Bible : UdonSharpBehaviour
 {
+    [SerializeField] private UdonSharpBehaviour[] despawn_components;
     [SerializeField] private Setting_Privacy privacy;
 
     [UdonSynced] private bool _has_been_claimed = false;
@@ -33,6 +34,18 @@ public class BibleOwner : UdonSharpBehaviour
         _label = GetComponent<TextMeshProUGUI>();
 
         Refresh();
+    }
+
+    public void Despawn()
+    {
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Despawn_");
+
+        foreach (var usb in despawn_components)
+            usb.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Despawn");
+    }
+    public void Despawn_()
+    {
+
     }
 
     public override void OnDeserialization()

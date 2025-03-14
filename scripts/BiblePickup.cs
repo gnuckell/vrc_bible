@@ -7,7 +7,7 @@ using VRC.Udon;
 
 public class BiblePickup : UdonSharpBehaviour
 {
-	[SerializeField] public BibleOwner owner;
+	[SerializeField] public Bible owner;
 
 	[HideInInspector] public BibleSpawnerExitZone spawner;
 

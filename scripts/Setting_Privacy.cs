@@ -8,7 +8,7 @@ using VRC.Udon;
 
 public class Setting_Privacy : UdonSharpBehaviour
 {
-    [SerializeField] private BibleOwner owner;
+    [SerializeField] private Bible owner;
     [SerializeField] private Setting_Privacy_Dropdown dropdown;
 
     [SerializeField] private GameObject canvas_object;
@@ -33,6 +33,12 @@ public class Setting_Privacy : UdonSharpBehaviour
     void Start()
     {
         Sync();
+    }
+
+    public void Despawn()
+    {
+        _level_SYNC = dropdown.value;
+        Refresh();
     }
 
     public override void OnDeserialization()
