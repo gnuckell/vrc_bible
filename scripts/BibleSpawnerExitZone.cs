@@ -8,13 +8,19 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 {
     [SerializeField] private int pool_start_offset = 0;
 
-    [UdonSynced] private int pool_active_matrix = 1;
 
     [SerializeField] private Transform spawn_transform;
     [SerializeField] private GameObject prefab_spawn;
 
     private GameObject[] object_pool;
-    private GameObject current_object;
+
+    [UdonSynced] private uint pool_bitmask = 0u;
+    [UdonSynced] private  int pool_current = 0;
+
+    private GameObject current_object {
+        get => object_pool[pool_current];
+        set => pool_current = IndexOf(value);
+    }
 
     private void Start()
     {
@@ -31,7 +37,6 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 
             bible_pickup.spawner = this;
         }
-        current_object = object_pool[0];
 
         RequestSerialization();
     }
@@ -40,7 +45,7 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
     {
         for (var i = 0; i < object_pool.Length; i++)
         {
-            object_pool[i].SetActive((pool_active_matrix & (1 << i)) == 1);
+            object_pool[i].SetActive((pool_bitmask & (1 << i)) != 0);
         }
     }
 
@@ -57,7 +62,7 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
         if (current_object.GetComponent<BiblePickup>() != null)
             current_object.GetComponent<BiblePickup>().ClaimHolder();
 
-        current_object = GetNextAvailableObject();
+        current_object = GetNextAvailable();
         SetPoolObjectActive(current_object, true);
 
         RequestSerialization();
@@ -89,10 +94,12 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
         //
         // if (i == -1) return;
 
-        pool_active_matrix |= (active ? 1 : 0) << i;
+        pool_bitmask = active ? (pool_bitmask | 1u << i) : (pool_bitmask & ~(1u << i));
+
+        // Debug.Log($"\n\nSetPoolObjectActive ::\n\nPool owner: {Networking.GetOwner(gameObject).displayName} ({(Networking.IsOwner(gameObject) ? "you!" : "someone else")})\nthe object in question: {obj}\npool bitmask: {pool_bitmask}\nbitmask position: {i}\nbitmask bit: {pool_bitmask & (1u << i)}\nobject active?: {active}\nbitmask active?: {(pool_bitmask & (1u << i)) != 0}\n\n");
     }
 
-    private GameObject GetNextAvailableObject()
+    private GameObject GetNextAvailable()
     {
         foreach (GameObject obj in object_pool)
             if (!obj.activeSelf) return obj;
