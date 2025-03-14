@@ -11,7 +11,7 @@ public class BookSelectorButton : Button
 		host.chapter_index = host.BOOK_HEADS[index];
 		if (host.BOOK_LENGTHS[index] == 1)
 		{
-			host.reader.Reset(host.chapter_index);
+			host.reader.ResetContent(host.chapter_index);
 			host.active_window_index = EBibleWindow.Reader;
 		}
 		else

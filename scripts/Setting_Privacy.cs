@@ -35,12 +35,6 @@ public class Setting_Privacy : UdonSharpBehaviour
         Sync();
     }
 
-    public void Despawn()
-    {
-        _level_SYNC = dropdown.value;
-        Refresh();
-    }
-
     public override void OnDeserialization()
     {
         Refresh();

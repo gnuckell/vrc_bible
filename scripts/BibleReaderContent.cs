@@ -32,6 +32,22 @@ public class BibleReaderContent : UdonSharpBehaviour
     [UdonSynced] [HideInInspector] public int head_chapter_SYNC = 0;
     [UdonSynced] [HideInInspector] public int tail_chapter_SYNC = 0;
 
+    public void OnEnable()
+    {
+        ResetContent();
+        // Sync();
+    }
+
+    public void Init()
+    {
+        ResetContent();
+    }
+
+	public void Despawn()
+	{
+		ResetContent();
+	}
+
     void Update()
     {
 		if (prox_is_awaiting_scroll_head)
@@ -62,17 +78,6 @@ public class BibleReaderContent : UdonSharpBehaviour
 		}
     }
 
-    public void OnEnable()
-    {
-        Reset();
-        // Sync();
-    }
-
-    public void Init()
-    {
-        Reset();
-    }
-
     public void Sync()
     {
         Networking.SetOwner(Networking.LocalPlayer, gameObject);
@@ -88,8 +93,8 @@ public class BibleReaderContent : UdonSharpBehaviour
 			Destroy(transform.GetChild(i).gameObject);
 	}
 
-	public void Reset() => Reset(host.chapter_index);
-	public void Reset(int chapt)
+	public void ResetContent() => ResetContent(host.chapter_index);
+	public void ResetContent(int chapt)
 	{
 		Clear();
 

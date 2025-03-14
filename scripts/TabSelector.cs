@@ -6,9 +6,11 @@ using VRC.Udon;
 
 public class TabSelector : UdonSharpBehaviour
 {
+    private int init_value;
+
     [SerializeField] private GameObject[] _tab_object_list;
-    private int _current_index = 0;
-    [SerializeField] [UdonSynced] private int _current_index_SYNC;
+    [SerializeField] private int _current_index;
+    [UdonSynced] private int _current_index_SYNC;
     public int current_index
     {
         get => _current_index_SYNC;
@@ -34,9 +36,15 @@ public class TabSelector : UdonSharpBehaviour
 
     private void Start()
     {
+        init_value = _current_index;
         _current_index = _current_index_SYNC;
 		foreach (var obj in _tab_object_list)
             obj.SetActive(obj == _tab_object_list[_current_index_SYNC]);
+    }
+
+    public void Despawn()
+    {
+        current_index = init_value;
     }
 
     public override void OnDeserialization()

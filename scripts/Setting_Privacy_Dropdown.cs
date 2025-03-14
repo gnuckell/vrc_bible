@@ -25,7 +25,7 @@ public class Setting_Privacy_Dropdown : UdonSharpBehaviour
     {
         dropdown.SetValueWithoutNotify(initial_value);
         previous_value = initial_value;
-        privacy.Despawn();
+        privacy.Sync();
     }
 
     public override void OnDeserialization()

@@ -38,14 +38,14 @@ public class Bible : UdonSharpBehaviour
 
     public void Despawn()
     {
-        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Despawn_");
+        SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Despawn_");
 
         foreach (var usb in despawn_components)
-            usb.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "Despawn");
+            usb.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Despawn");
     }
     public void Despawn_()
     {
-
+        Unclaim();
     }
 
     public override void OnDeserialization()

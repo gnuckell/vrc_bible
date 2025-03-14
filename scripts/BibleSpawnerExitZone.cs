@@ -8,7 +8,6 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 {
     [SerializeField] private int pool_start_offset = 0;
 
-
     [SerializeField] private Transform spawn_transform;
     [SerializeField] private GameObject prefab_spawn;
 

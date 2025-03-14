@@ -56,7 +56,12 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		_scroll_rect = GetComponent<ScrollRect>();
 
-		Reset();
+		ResetContent();
+	}
+
+	public void Despawn()
+	{
+		ResetContent();
 	}
 
 	void Update()
@@ -87,8 +92,8 @@ public class BibleReader : UdonSharpBehaviour
 	// 	_scroll_rect.verticalNormalizedPosition = _scroll_value_SYNC;
 	// }
 
-	public void Reset() => Reset(host.chapter_index);
-	public void Reset(int chapt)
+	public void ResetContent() => ResetContent(host.chapter_index);
+	public void ResetContent(int chapt)
 	{
 		Clear();
 
