@@ -22,7 +22,7 @@ public class Setting_Privacy_Dropdown : UdonSharpBehaviour
 
     public void OnValueChanged()
     {
-		if (owner.is_local_owner)
+		if (owner.is_owner)
 		{
 	        owner.ClaimLocal();
 			previous_value = dropdown.value;

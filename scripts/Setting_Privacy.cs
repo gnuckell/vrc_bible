@@ -47,7 +47,7 @@ public class Setting_Privacy : UdonSharpBehaviour
 
     private void Refresh()
     {
-        bool definitely_allow = owner.is_unclaimed_or_owner;
+        bool definitely_allow = owner.is_owner_or_unclaimed;
 
         canvas_object.GetComponent<Canvas>().enabled = definitely_allow || level >= 1;
         canvas_object.GetComponent<GraphicRaycaster>().enabled = definitely_allow || level >= 2;

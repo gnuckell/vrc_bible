@@ -13,8 +13,8 @@ public class BibleOwner : UdonSharpBehaviour
     [UdonSynced] private bool _has_been_claimed = false;
     // public bool has_been_claimed => _has_been_claimed;
 
-    public bool is_local_owner => _has_been_claimed && Networking.IsOwner(gameObject);
-    public bool is_unclaimed_or_owner => !_has_been_claimed || Networking.IsOwner(gameObject);
+    public bool is_owner => _has_been_claimed && Networking.IsOwner(gameObject);
+    public bool is_owner_or_unclaimed => !_has_been_claimed || Networking.IsOwner(gameObject);
 
     public VRCPlayerApi owner => _has_been_claimed ? Networking.GetOwner(gameObject) : null;
     // public string label_text => owner != null ? $"[{owner.playerId}] {owner.displayName}" : "<none>";
