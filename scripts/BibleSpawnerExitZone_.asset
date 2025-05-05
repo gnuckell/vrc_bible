@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: BibleSpawnerExitZone_
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: d848b56334ac69f40b5168d16bae09de,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: b65369c25a66ce94aa520340e295d3d1,
     type: 2}
   udonAssembly: 
   assemblyError: 

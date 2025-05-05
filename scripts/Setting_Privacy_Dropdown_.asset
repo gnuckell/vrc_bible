@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: Setting_Privacy_Dropdown_
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: b9071b082151b0243aff25c3d874da16,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: f1b8baaa54aa4e84bbec04f2d3a516b9,
     type: 2}
   udonAssembly: 
   assemblyError: 

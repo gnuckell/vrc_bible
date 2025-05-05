@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllowCollisionOwnershipTransfer: 0
+  ForceKinematicOnRemote: 0
 --- !u!114 &2535809053456100760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,6 +909,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4274810124777312123, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 78149ef5b5de093449ffe51858ad0355,
+        type: 2}
     - target: {fileID: 4327738970774268848, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1049,6 +1056,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5271478524067809626, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f1b8baaa54aa4e84bbec04f2d3a516b9,
+        type: 2}
     - target: {fileID: 5351301515452608435, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_AnchorMax.y

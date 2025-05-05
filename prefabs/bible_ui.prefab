@@ -349,7 +349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e748efeab64050e40a0067fd6181ad84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8cc8e1b07e326234899829659c312dd9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: https://gnuckell.carrd.co/
+  m_Text: https://snotbane.carrd.co/
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "https://github.com/gnuckell/vrc_bible\u200B"
+  m_text: "https://github.com/snotbane/vrc_bible\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -707,7 +707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &542669402321642451
 RectTransform:
   m_ObjectHideFlags: 0
@@ -724,10 +724,10 @@ RectTransform:
   - {fileID: 4327738970774268848}
   m_Father: {fileID: 5542568952147293290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 72}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 4, y: -292}
+  m_SizeDelta: {x: 504, y: 72}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &271317484989542207
 CanvasRenderer:
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This VRChat Bible Reader was crafted by <link=https://gnuckell.carrd.co/><u>Gnuckell</u></link>\nso
+  m_text: This VRChat Bible Reader was crafted by <link=https://snotbane.carrd.co/><u>Snotbane</u></link>\nso
     that all may become familiar in truth and love.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fa9d19bfaf012734fade9f2fabc01b98, type: 2}
@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4372371854156716131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,7 +1351,7 @@ MonoBehaviour:
   - {fileID: 6266577822659297367}
   - {fileID: 767900311722087511}
   - {fileID: 6245722400482820982}
-  _current_index_SYNC: 2
+  _current_index: 0
 --- !u!114 &2838246484542208325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1443,7 +1443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "https://gnuckell.carrd.co/\u200B"
+  m_text: "https://snotbane.carrd.co/\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1768,7 +1768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4699669797581998573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1783,10 +1783,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5542568952147293290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 80}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 256, y: -40}
+  m_SizeDelta: {x: 504, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &210329969055050577
 CanvasRenderer:
@@ -2045,6 +2045,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8161160625837215240}
+  despawn_components: []
   privacy: {fileID: 7051068749490841192}
 --- !u!114 &8161160625837215240
 MonoBehaviour:
@@ -2156,7 +2157,7 @@ MonoBehaviour:
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
   _syncMethod: 3
-  serializedProgramAsset: {fileID: 11400000, guid: 56e2bf6ab83f7b84ca12a9e013f7f750,
+  serializedProgramAsset: {fileID: 11400000, guid: 78149ef5b5de093449ffe51858ad0355,
     type: 2}
   programSource: {fileID: 11400000, guid: 78fdc028cf8064842babc01c57a6076d, type: 2}
   serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
@@ -2364,7 +2365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6546581809909051643
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2379,10 +2380,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5542568952147293290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 80}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 256, y: -316}
+  m_SizeDelta: {x: 504, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6030139297015433582
 CanvasRenderer:
@@ -2499,7 +2500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5133470301887040319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2514,10 +2515,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5542568952147293290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 256, y: -498}
+  m_SizeDelta: {x: 504, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &162047434776833616
 CanvasRenderer:
@@ -2817,7 +2818,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: https://github.com/gnuckell/vrc_bible
+  m_Text: https://github.com/snotbane/vrc_bible
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -2930,7 +2931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <link=https://gnuckell.carrd.co/><u>Ko-Fi Link</u></link>
+  m_text: <link=https://snotbane.carrd.co/><u>Ko-Fi Link</u></link>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fa9d19bfaf012734fade9f2fabc01b98, type: 2}
   m_sharedMaterial: {fileID: 7940738786792800753, guid: fa9d19bfaf012734fade9f2fabc01b98,
@@ -2964,7 +2965,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3066,7 +3067,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Want to use this in your world, on your avatar, or need a custom translation?
-    Check out the <link=https://github.com/gnuckell/vrc_bible><u>GitHub</u></link>
+    Check out the <link=https://github.com/snotbane/vrc_bible><u>GitHub</u></link>
     for info.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fa9d19bfaf012734fade9f2fabc01b98, type: 2}
@@ -3289,7 +3290,7 @@ PrefabInstance:
     - target: {fileID: 3964822410642291631, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4382281954718221790, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
@@ -3351,7 +3352,7 @@ PrefabInstance:
     - target: {fileID: 5252892433438159286, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6793537978041411508, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
@@ -3407,7 +3408,7 @@ PrefabInstance:
     - target: {fileID: 7187201955737768869, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7771480866378391165, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
@@ -3459,7 +3460,7 @@ PrefabInstance:
     - target: {fileID: 8488025631857248661, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8653619558990706084, guid: ba278d0a358e06e4ebb45c9cea0a0743,
         type: 3}
@@ -5212,27 +5213,27 @@ PrefabInstance:
     - target: {fileID: 178971974586464294, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 178971974586464294, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 178971974586464294, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 529206165214328774, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 529206165214328774, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 984403492429454916, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -5322,7 +5323,7 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -5332,12 +5333,12 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 504
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -5377,12 +5378,12 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -242
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -5408,6 +5409,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: reader_font_size
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349782246774595270, guid: b629d8507c14dca458aa23756f95ba5c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5769,6 +5775,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: reader_font_type
       objectReference: {fileID: 0}
+    - target: {fileID: 6282669269381203829, guid: b693b221c201282489a5fe066c599564,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5787,7 +5798,7 @@ PrefabInstance:
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
@@ -5797,12 +5808,12 @@ PrefabInstance:
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 504
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
@@ -5847,12 +5858,12 @@ PrefabInstance:
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -178
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
@@ -6150,12 +6161,12 @@ PrefabInstance:
     - target: {fileID: 1097969283530269693, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_Size
-      value: 0.742268
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1097969283530269693, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_Value
-      value: 1.0000004
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2759413387439865415, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
@@ -6343,6 +6354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: privacy
       objectReference: {fileID: 0}
+    - target: {fileID: 6282669269381203829, guid: b693b221c201282489a5fe066c599564,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6361,7 +6377,7 @@ PrefabInstance:
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
@@ -6371,12 +6387,12 @@ PrefabInstance:
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 504
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
@@ -6421,12 +6437,12 @@ PrefabInstance:
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -114
       objectReference: {fileID: 0}
     - target: {fileID: 7274049281109607746, guid: b693b221c201282489a5fe066c599564,
         type: 3}
@@ -6579,7 +6595,7 @@ MonoBehaviour:
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
   _syncMethod: 3
-  serializedProgramAsset: {fileID: 11400000, guid: b9071b082151b0243aff25c3d874da16,
+  serializedProgramAsset: {fileID: 11400000, guid: f1b8baaa54aa4e84bbec04f2d3a516b9,
     type: 2}
   programSource: {fileID: 11400000, guid: b31d68fcc019136418ea0fa2769d8655, type: 2}
   serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgQAAAAAAAAAAi8CAAAAAVMAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AVQBkAG8AbgBCAGUAaABhAHYAaQBvAHUAcgAsACAAVgBSAEMALgBVAGQAbwBuAF0AXQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAgAAAAYCAAAAAAAAACcBBAAAAHQAeQBwAGUAARcAAABTAHkAcwB0AGUAbQAuAFMAdAByAGkAbgBnACwAIABtAHMAYwBvAHIAbABpAGIAJwEKAAAAUwB5AG0AYgBvAGwATgBhAG0AZQABBQAAAG8AdwBuAGUAcgAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBPAGIAagBlAGMAdAAsACAAbQBzAGMAbwByAGwAaQBiAC0BBQAAAFYAYQBsAHUAZQAHBQIwAgAAAAMAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAQcAAABwAHIAaQB2AGEAYwB5ACcBBAAAAHQAeQBwAGUAARcAAABTAHkAcwB0AGUAbQAuAE8AYgBqAGUAYwB0ACwAIABtAHMAYwBvAHIAbABpAGIALQEFAAAAVgBhAGwAdQBlAAcFAi8DAAAAAVgAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAVABNAFAAcgBvAC4AVABNAFAAXwBEAHIAbwBwAGQAbwB3AG4ALAAgAFUAbgBpAHQAeQAuAFQAZQB4AHQATQBlAHMAaABQAHIAbwBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAQAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAQgAAABkAHIAbwBwAGQAbwB3AG4AJwEEAAAAdAB5AHAAZQABFwAAAFMAeQBzAHQAZQBtAC4ATwBiAGoAZQBjAHQALAAgAG0AcwBjAG8AcgBsAGkAYgAtAQUAAABWAGEAbAB1AGUABwUCLwQAAAABSQAAAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAC4AVQBkAG8AbgBWAGEAcgBpAGEAYgBsAGUAYAAxAFsAWwBTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiAF0AXQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ABQAAAAYCAAAAAAAAACcBBAAAAHQAeQBwAGUAARcAAABTAHkAcwB0AGUAbQAuAFMAdAByAGkAbgBnACwAIABtAHMAYwBvAHIAbABpAGIAJwEKAAAAUwB5AG0AYgBvAGwATgBhAG0AZQABHwAAAF8AXwBfAFUAZABvAG4AUwBoAGEAcgBwAEIAZQBoAGEAdgBpAG8AdQByAFYAZQByAHMAaQBvAG4AXwBfAF8AJwEEAAAAdAB5AHAAZQABFgAAAFMAeQBzAHQAZQBtAC4ASQBuAHQAMwAyACwAIABtAHMAYwBvAHIAbABpAGIAFwEFAAAAVgBhAGwAdQBlAAIAAAAHBQcFBwU=
@@ -6780,27 +6796,27 @@ PrefabInstance:
     - target: {fileID: 178971974586464294, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 178971974586464294, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 178971974586464294, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 529206165214328774, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 529206165214328774, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 984403492429454916, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -6890,7 +6906,7 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -6900,12 +6916,12 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 504
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -6945,12 +6961,12 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -454
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
@@ -6976,6 +6992,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: other_bible_count
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349782246774595270, guid: b629d8507c14dca458aa23756f95ba5c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7329,7 +7350,7 @@ PrefabInstance:
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -326
+      value: -390
       objectReference: {fileID: 0}
     - target: {fileID: 6658660504603888444, guid: b629d8507c14dca458aa23756f95ba5c,
         type: 3}
