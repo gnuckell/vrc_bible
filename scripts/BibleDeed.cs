@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class BibleDeed : UdonSharpBehaviour
     [SerializeField] public UdonSharpBehaviour[] listener_components;
 
     [UdonSynced] private bool _has_been_claimed = false;
+    public bool has_been_claimed => _has_been_claimed;
+
     public VRCPlayerApi claimant {
         get => _has_been_claimed ? Networking.GetOwner(gameObject) : null;
         set {
@@ -23,7 +26,6 @@ public class BibleDeed : UdonSharpBehaviour
             Refresh();
             RequestSerialization();
 
-            // privacy.Sync();
             foreach (var script in listener_components) {
                 script.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Sync");
             }

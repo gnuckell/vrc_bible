@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
-  m_Name: Setting_Privacy_
+  m_Name: BibleDeedListener_
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 78149ef5b5de093449ffe51858ad0355,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 3eb61662c912d7f409ee5540e048dc04,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 9467f1dbe151fe642a897a07789e68ef, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: ad94c18db0de3cc4ab424de874001ca8, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 0
   hasInteractEvent: 0
-  scriptID: 3323048517123447556
+  scriptID: -2334036973093484563
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
