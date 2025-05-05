@@ -56,15 +56,21 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!Networking.IsOwner(gameObject) || other.gameObject != current_object) return;
+        if (other.gameObject != current_object) return;
 
-        if (current_object.GetComponent<BiblePickup>() != null)
-            current_object.GetComponent<BiblePickup>().ClaimHolder();
+        if (Networking.IsOwner(other.gameObject))
+        {
+            if (current_object.GetComponent<BiblePickup>() != null)
+                current_object.GetComponent<BiblePickup>().ClaimHolder();
+        }
 
-        current_object = GetNextAvailable();
-        SetPoolObjectActive(current_object, true);
+        if (Networking.IsOwner(gameObject))
+        {
+            current_object = GetNextAvailable();
+            SetPoolObjectActive(current_object, true);
 
-        RequestSerialization();
+            RequestSerialization();
+        }
     }
 
     public void ReturnUsedBible(GameObject obj)

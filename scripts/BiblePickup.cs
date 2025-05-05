@@ -9,12 +9,19 @@ public class BiblePickup : UdonSharpBehaviour
 {
 	[SerializeField] public BibleDeed deed;
 
+	[HideInInspector] public VRC_Pickup pickup;
 	[HideInInspector] public BibleSpawnerExitZone spawner;
 
-    public void ClaimHolder()
+	private void Start()
+	{
+		pickup = GetComponent<VRC_Pickup>();
+	}
+
+	public void ClaimHolder()
 	{
 		// Set the deed's claimant to the player holding THIS pickup.
-		deed.claimant = Networking.GetOwner(gameObject);
+		deed.claimant = pickup.currentPlayer;
+		// deed.claimant = Networking.GetOwner(gameObject);
 	}
 
 
