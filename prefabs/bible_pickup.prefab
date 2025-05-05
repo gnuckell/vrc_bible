@@ -270,7 +270,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1242918140385505541}
-  owner: {fileID: 5788677845803129567}
+  deed: {fileID: 5788677845803129567}
   spawner: {fileID: 0}
 --- !u!114 &1242918140385505541
 MonoBehaviour:
@@ -464,7 +464,7 @@ PrefabInstance:
     - target: {fileID: 3867525647828206351, guid: acae517a6830b3b4688c2dfc9e3ac689,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: ReturnToSpawner
+      value: TryReturnToSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 3867525647828206351, guid: acae517a6830b3b4688c2dfc9e3ac689,
         type: 3}
@@ -1181,6 +1181,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6058259458842864357, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6319937779689636397, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -1582,12 +1587,12 @@ PrefabInstance:
     - target: {fileID: 8931261458607296469, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_Size
-      value: 0.6956522
+      value: 0.7659575
       objectReference: {fileID: 0}
     - target: {fileID: 8931261458607296469, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_Value
-      value: 1.0000002
+      value: 0.99999964
       objectReference: {fileID: 0}
     - target: {fileID: 9170549672060693235, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}

@@ -7,21 +7,27 @@ using VRC.Udon;
 
 public class BiblePickup : UdonSharpBehaviour
 {
-	[SerializeField] public Bible owner;
+	[SerializeField] public BibleDeed deed;
 
 	[HideInInspector] public BibleSpawnerExitZone spawner;
 
     public void ClaimHolder()
 	{
-		owner.Claim(Networking.GetOwner(gameObject));
-		// owner.ClaimLocal();
+		// Set the deed's claimant to the player holding THIS pickup.
+		deed.claimant = Networking.GetOwner(gameObject);
+	}
+
+
+	public void TryReturnToSpawner()
+	{
+		if (deed.is_claimed_by_other) return;
+
+		ReturnToSpawner();
 	}
 
 	public void ReturnToSpawner()
 	{
-		if (owner.is_owner_or_unclaimed) return;
-
-		owner.Unclaim();
+		deed.Unclaim();
 		spawner.ReturnUsedBible(gameObject);
 	}
 }

@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4372371854156716131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,7 +1900,7 @@ GameObject:
   - component: {fileID: 285413011154042472}
   - component: {fileID: 8161160625837215240}
   m_Layer: 0
-  m_Name: owner_label
+  m_Name: deed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2045,8 +2045,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8161160625837215240}
-  despawn_components: []
-  privacy: {fileID: 7051068749490841192}
+  listener_components: []
 --- !u!114 &8161160625837215240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,11 +2131,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 4274810124777312123}
-  owner: {fileID: 285413011154042472}
-  dropdown: {fileID: 2446511239715190418}
-  canvas_object: {fileID: 2873813610789830230}
-  mesh_object: {fileID: 0}
-  prop_object: {fileID: 0}
 --- !u!114 &4274810124777312123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4133,7 +4127,7 @@ PrefabInstance:
     - target: {fileID: 4045880480512956482, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4250561742594341824, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
@@ -6532,18 +6526,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5271478524067809626}
   m_SourcePrefab: {fileID: 100100000, guid: b693b221c201282489a5fe066c599564, type: 3}
---- !u!114 &792672372957594143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9102852493039583144, guid: b693b221c201282489a5fe066c599564,
-    type: 3}
-  m_PrefabInstance: {fileID: 8454372847517728183}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1229058236871661070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1229058236871661070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7232089115175463865, guid: b693b221c201282489a5fe066c599564,
@@ -6572,9 +6554,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5271478524067809626}
-  owner: {fileID: 285413011154042472}
-  privacy: {fileID: 7051068749490841192}
-  dropdown: {fileID: 792672372957594143}
 --- !u!114 &5271478524067809626
 MonoBehaviour:
   m_ObjectHideFlags: 0
