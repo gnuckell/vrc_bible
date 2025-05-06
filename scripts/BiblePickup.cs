@@ -35,6 +35,7 @@ public class BiblePickup : UdonSharpBehaviour
 
 	public void ReturnToSpawner()
 	{
+		Networking.SetOwner(Networking.LocalPlayer, gameObject);
 		deed.Unclaim();
 		spawner.ReturnUsedBible(gameObject);
 	}

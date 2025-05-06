@@ -40,7 +40,7 @@ public class Setting_Dropdown : BibleDeedListener
 
 	public override void Refresh()
 	{
-        dropdown.interactable = deed.is_owner_or_unclaimed;
+        dropdown.interactable = deed.is_owner;
         dropdown.SetValueWithoutNotify(value);
 	}
 

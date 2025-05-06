@@ -10,18 +10,18 @@ public class BibleDeedListener : UdonSharpBehaviour
 
     protected virtual void Start()
     {
-        // Refresh();
+        Refresh();
     }
 
     public override void OnDeserialization()
     {
-        // Refresh();
+        Refresh();
     }
 
     public virtual void Sync()
     {
         Networking.SetOwner(Networking.LocalPlayer, gameObject);
-        // Refresh();
+        Refresh();
         RequestSerialization();
     }
 
