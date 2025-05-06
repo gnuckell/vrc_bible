@@ -65,36 +65,4 @@ public class BibleDeed : UdonSharpBehaviour
 
     public void ClaimLocalPlayer() => claimant = Networking.LocalPlayer;
     public void Unclaim() => claimant = null;
-
-//     [SerializeField] private UdonSharpBehaviour[] despawn_components;
-//     [SerializeField] private Setting_Privacy privacy;
-
-//     [UdonSynced] private bool _has_been_claimed = false;
-//     // public bool has_been_claimed => _has_been_claimed;
-
-//     public bool is_owner => _has_been_claimed && Networking.IsOwner(gameObject);
-//     public bool is_owner_or_unclaimed => !_has_been_claimed || Networking.IsOwner(gameObject);
-//     public bool is_claimed_by_other => _has_been_claimed && !Networking.IsOwner(gameObject);
-
-//     private TextMeshProUGUI _label;
-
-//     void Start()
-//     {
-//         _label = GetComponent<TextMeshProUGUI>();
-
-//         Refresh();
-//     }
-
-//     public void Despawn()
-//     {
-//         SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Despawn_");
-
-//         foreach (var usb in despawn_components)
-//             usb.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Despawn");
-//     }
-//     public void Despawn_()
-//     {
-//         Unclaim();
-//     }
-
 }
