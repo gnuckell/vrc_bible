@@ -241,7 +241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3344319769493492996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -323,9 +323,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'No more Bibles are available.
+  m_text: 'No more Bibles available.
 
-    Why not ask someone to share?'
+    Why not share one?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af19c925155b84e418d2b05719f71a9f, type: 2}
   m_sharedMaterial: {fileID: 5246447812521111351, guid: af19c925155b84e418d2b05719f71a9f,
@@ -797,6 +797,12 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4319442329209734204, guid: e29d7f713e82b6e42a72d80984194043,
+        type: 3}
+    - target: {fileID: 4586093402746913522, guid: e29d7f713e82b6e42a72d80984194043,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4586093402746913522, guid: e29d7f713e82b6e42a72d80984194043,
         type: 3}
     - target: {fileID: 4756105000116132930, guid: e29d7f713e82b6e42a72d80984194043,
         type: 3}
