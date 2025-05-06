@@ -31,6 +31,13 @@ public class Setting_Dropdown : BibleDeedListener
         base.Start();
     }
 
+	public override void Sync()
+	{
+        if (!deed.has_been_claimed) _value_SYNC = initial_value;
+
+		base.Sync();
+	}
+
 	public override void Refresh()
 	{
         dropdown.interactable = deed.is_owner_or_unclaimed;

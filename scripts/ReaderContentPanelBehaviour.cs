@@ -28,7 +28,5 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 			Destroy(chapter_title_text.gameObject);
 
 		content_text.text = reader.CreateChapterText(chapt);
-
-		content_text.fontSize = 10f;
 	}
 }

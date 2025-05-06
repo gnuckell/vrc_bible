@@ -18,7 +18,7 @@ public class BibleDeedListener : UdonSharpBehaviour
         Refresh();
     }
 
-    public void Sync()
+    public virtual void Sync()
     {
         Networking.SetOwner(Networking.LocalPlayer, gameObject);
         Refresh();

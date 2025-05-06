@@ -2046,6 +2046,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 8161160625837215240}
   listener_components:
   - {fileID: 2446511239715190418}
+  - {fileID: 60463583751766009}
 --- !u!114 &8161160625837215240
 MonoBehaviour:
   m_ObjectHideFlags: 0
