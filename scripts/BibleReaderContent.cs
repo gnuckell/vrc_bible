@@ -7,7 +7,7 @@ using VRC.Udon;
 
 public class BibleReaderContent : UdonSharpBehaviour
 {
-	[SerializeField] private GameObject pref_content;
+	[SerializeField] public GameObject pref_content;
     [SerializeField] private BibleHost _host;
 	public BibleHost host => _host;
     [SerializeField] private ScrollRect _scroll_rect;
@@ -34,7 +34,7 @@ public class BibleReaderContent : UdonSharpBehaviour
 
     public void OnEnable()
     {
-        ResetContent();
+        // ResetContent();
         // Sync();
     }
 
