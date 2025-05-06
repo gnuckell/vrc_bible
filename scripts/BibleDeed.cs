@@ -54,6 +54,7 @@ public class BibleDeed : UdonSharpBehaviour
         RequestSerialization();
 
         foreach (var script in listener_components) {
+            Networking.SetOwner(Networking.LocalPlayer, script.gameObject);
             script.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Sync");
         }
     }

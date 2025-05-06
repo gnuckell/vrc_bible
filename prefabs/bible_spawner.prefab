@@ -892,7 +892,7 @@ PrefabInstance:
     - target: {fileID: 5651167850597063607, guid: e29d7f713e82b6e42a72d80984194043,
         type: 3}
       propertyPath: m_Name
-      value: bible_pickup
+      value: bible_pickup_00
       objectReference: {fileID: 0}
     - target: {fileID: 5788677845803129567, guid: e29d7f713e82b6e42a72d80984194043,
         type: 3}
