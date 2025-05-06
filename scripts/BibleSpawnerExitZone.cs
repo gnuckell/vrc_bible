@@ -29,7 +29,10 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
         for (var i = 0; i < object_pool.Length; i++)
         {
             object_pool[i] = spawn_transform.GetChild((i + pool_start_offset) % object_pool.Length).gameObject;
-            SetPoolObjectActive(object_pool[i], i == 0);
+            if (Networking.IsMaster)
+                SetPoolIndexActive(i, i == 0);
+            else
+                DesPoolIndexActive(i);
 
             var bible_pickup = object_pool[i].GetComponent<BiblePickup>();
             if (bible_pickup == null) continue;
@@ -37,15 +40,14 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
             bible_pickup.spawner = this;
         }
 
-        RequestSerialization();
+        if (Networking.IsMaster)
+            RequestSerialization();
     }
 
     public override void OnDeserialization()
     {
         for (var i = 0; i < object_pool.Length; i++)
-        {
-            object_pool[i].SetActive((pool_bitmask & (1 << i)) != 0);
-        }
+            DesPoolIndexActive(i);
     }
 
     public void Sync()
@@ -92,16 +94,20 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
     private void SetPoolObjectActive(GameObject obj, bool active)
     {
         if (obj == null) return;
-        obj.SetActive(active);
-        var i = IndexOf(obj);
+        SetPoolIndexActive(IndexOf(obj), active);
+    }
 
-        // Unnecessary check if private.
-        //
-        // if (i == -1) return;
-
+    private void SetPoolIndexActive(int i, bool active)
+    {
+        object_pool[i].SetActive(active);
         pool_bitmask = active ? (pool_bitmask | 1u << i) : (pool_bitmask & ~(1u << i));
 
         // Debug.Log($"\n\nSetPoolObjectActive ::\n\nPool owner: {Networking.GetOwner(gameObject).displayName} ({(Networking.IsOwner(gameObject) ? "you!" : "someone else")})\nthe object in question: {obj}\npool bitmask: {pool_bitmask}\nbitmask position: {i}\nbitmask bit: {pool_bitmask & (1u << i)}\nobject active?: {active}\nbitmask active?: {(pool_bitmask & (1u << i)) != 0}\n\n");
+    }
+
+    private void DesPoolIndexActive(int i)
+    {
+        object_pool[i].SetActive((pool_bitmask & (1 << i)) != 0);
     }
 
     private GameObject GetNextAvailable()

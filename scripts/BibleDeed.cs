@@ -18,17 +18,12 @@ public class BibleDeed : UdonSharpBehaviour
 
     public VRCPlayerApi claimant {
         get => _has_been_claimed ? Networking.GetOwner(gameObject) : null;
-        set {
+        private set {
             _has_been_claimed = value != null;
             if (_has_been_claimed)
                 Networking.SetOwner(value, gameObject);
 
-            Refresh();
-            RequestSerialization();
-
-            foreach (var script in listener_components) {
-                script.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Sync");
-            }
+            Sync();
         }
     }
 
@@ -53,7 +48,17 @@ public class BibleDeed : UdonSharpBehaviour
         Refresh();
     }
 
-    private void Refresh()
+    public void Sync()
+    {
+        Refresh();
+        RequestSerialization();
+
+        foreach (var script in listener_components) {
+            script.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Sync");
+        }
+    }
+
+    public void Refresh()
     {
         _label.text = $"{pickup_name} :: " + (_has_been_claimed ? $"{claimant.displayName} [{claimant.playerId}]" : "<none>");
     }

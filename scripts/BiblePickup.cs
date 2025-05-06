@@ -20,8 +20,9 @@ public class BiblePickup : UdonSharpBehaviour
 	public void ClaimHolder()
 	{
 		// Set the deed's claimant to the player holding THIS pickup.
-		deed.claimant = pickup.currentPlayer;
+		// deed.claimant = pickup.currentPlayer;
 		// deed.claimant = Networking.GetOwner(gameObject);
+		deed.ClaimLocalPlayer();
 	}
 
 
