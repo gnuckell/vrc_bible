@@ -13,10 +13,10 @@ public class Setting_FontFamily : Setting_Dropdown
 	{
 		base.Refresh();
 
-        // if (bibleReaderContent.pref_content != font_prefabs[value])
-        // {
-        //     bibleReaderContent.pref_content = font_prefabs[value];
-        //     bibleReaderContent.ResetContent();
-        // }
+        if (bibleReaderContent.pref_content != font_prefabs[value])
+        {
+            bibleReaderContent.pref_content = font_prefabs[value];
+            bibleReaderContent.ResetContent();
+        }
 	}
 }

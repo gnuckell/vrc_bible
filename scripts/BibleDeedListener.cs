@@ -20,7 +20,6 @@ public class BibleDeedListener : UdonSharpBehaviour
 
     public virtual void Sync()
     {
-        Networking.SetOwner(deed.claimant, gameObject);
         Refresh();
         RequestSerialization();
     }
