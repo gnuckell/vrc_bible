@@ -7,6 +7,8 @@ using VRC.Udon;
 
 public class Setting_Dropdown : BibleDeedListener
 {
+    [SerializeField] private bool reset_on_unclaim = true;
+
     [HideInInspector] public TMP_Dropdown dropdown;
 
     [UdonSynced] private int _value_SYNC;
@@ -15,7 +17,10 @@ public class Setting_Dropdown : BibleDeedListener
         get => _value_SYNC;
         set {
             _value_SYNC = value;
-            Sync();
+
+            // Use the base method to allow us to set the value even if the deed is unclaimed.
+            // The normal method will only be called at the moment the deed is unclaimed.
+            base.Sync();
         }
     }
 
@@ -33,14 +38,14 @@ public class Setting_Dropdown : BibleDeedListener
 
 	public override void Sync()
 	{
-        if (!deed.has_been_claimed) _value_SYNC = initial_value;
+        if (reset_on_unclaim && !deed.is_claimed) _value_SYNC = initial_value;
 
 		base.Sync();
 	}
 
 	public override void Refresh()
 	{
-        dropdown.interactable = deed.is_owner;
+        dropdown.interactable = deed.is_owner_or_unclaimed;
         dropdown.SetValueWithoutNotify(value);
 	}
 

@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 2056078471437274828, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2056078471437274828, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
@@ -127,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 56
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}

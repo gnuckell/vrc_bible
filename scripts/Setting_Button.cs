@@ -17,6 +17,6 @@ public class Setting_Button : BibleDeedListener
 
 	public override void Refresh()
 	{
-        button.interactable = deed.is_owner;
+        button.interactable = deed.is_owner_or_unclaimed;
 	}
 }

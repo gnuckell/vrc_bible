@@ -16,9 +16,9 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
     [UdonSynced] private uint pool_bitmask = 0u;
     [UdonSynced] private  int pool_current = 0;
 
-    private GameObject current_object {
+    public GameObject current_object {
         get => object_pool[pool_current];
-        set => pool_current = IndexOf(value);
+        private set => pool_current = IndexOf(value);
     }
 
     private void Start()

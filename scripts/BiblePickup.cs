@@ -17,6 +17,14 @@ public class BiblePickup : UdonSharpBehaviour
 		pickup = GetComponent<VRC_Pickup>();
 	}
 
+	public override void OnPickup()
+	{
+		base.OnPickup();
+
+		if (!deed.is_claimed && spawner.current_object != gameObject)
+			ClaimHolder();
+	}
+
 	public void ClaimHolder()
 	{
 		// Set the deed's claimant to the player holding THIS pickup.
