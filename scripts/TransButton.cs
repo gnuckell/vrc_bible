@@ -12,23 +12,17 @@ public sealed class TransButton : Button
 	public TextAsset address;
 	public TextAsset content;
 
-	void Start()
+	protected override void Start()
 	{
+		base.Start();
+
 		text.text = GetButtonText(index);
 	}
 
 	public override void OnClick()
 	{
-		// host.trans_index = index;
-		if (host == null)
+		if (host != null)
 		{
-			/**	Spawn a new bible with this translation
-			*/
-		}
-		else
-		{
-			/**	Update the existing bible with this translation
-			*/
 			UpdateHost();
 			host.active_window_index = EBibleWindow.Reader;
 		}

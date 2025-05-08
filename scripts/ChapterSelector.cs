@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Linq;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -10,16 +12,17 @@ public sealed class ChapterSelector : ButtonGrid
 
 	private void OnEnable()
 	{
-		Reset(host.chapter_index);
+		// Debug.Log(host.current_book_length);
+
+		UpdateVisibleChildren(host.current_book_length);
 	}
 
-	public override void Reset(int index)
+	public override void ResetChildren()
 	{
-		var book = host.CHAPTER_BOOKS[index];
-		max_buttons = host.BOOK_LENGTHS[book];
+		max_buttons = 0;
+		foreach (var i in host.BOOK_LENGTHS)
+			max_buttons = Math.Max(i, max_buttons);
 
-		base.Reset(book);
+		base.ResetChildren();
 	}
-
-	protected override int GetButtonIndex(int index, int local) => host.GetChapterFromLocals(index, local);
 }

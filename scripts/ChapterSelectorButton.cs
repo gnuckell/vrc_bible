@@ -9,9 +9,10 @@ public sealed class ChapterSelectorButton : Button
 {
 	public override void OnClick()
 	{
-		host.reader.ResetContent(index);
+		host.chapter_index = host.current_book_head + index;
+		host.reader.ResetContent(host.chapter_index);
 		host.active_window_index = EBibleWindow.Reader;
 	}
 
-	protected override string GetButtonText(int index) => $"{host.CHAPTER_LOCALS[index] + 1}";
+	protected override string GetButtonText(int index) => $"{index + 1}";
 }

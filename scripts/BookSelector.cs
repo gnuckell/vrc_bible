@@ -10,6 +10,6 @@ public sealed class BookSelector : ButtonGrid
 	{
 		base.Start();
 
-		Reset(0);
+		ResetChildren();
 	}
 }

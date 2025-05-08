@@ -42,6 +42,7 @@ public class BibleHost : UdonSharpBehaviour
 	[SerializeField] private TextMeshProUGUI _chapter_text;
 
 	[SerializeField] private TabSelector _tab_selector;
+	[SerializeField] private ButtonGrid _chapter_selector;
 
 	[Header("Settings")]
 
@@ -80,15 +81,28 @@ public class BibleHost : UdonSharpBehaviour
 	private string _content_lut;
 	internal string content_lut { get => _content_lut; private set => _content_lut = value; }
 
+	// Full names of each book, e.g. Genesis, Exodus, Leviticus
 	internal readonly string[] BOOK_NAMES = new string[MAX_BOOK_COUNT];
+	// Abbreviated names of each book, e.g. GEN, EXO, LEV
 	internal readonly string[] BOOK_ABBRS = new string[MAX_BOOK_COUNT];
+	// The length (in chapters) of each book.
 	internal readonly int[] BOOK_LENGTHS = new int[MAX_BOOK_COUNT];
+	// The head chapter address (in the global chapter index) of each book.
 	internal readonly int[] BOOK_HEADS = new int[MAX_BOOK_COUNT];
 
+	// The chapter number each chapter is, relative to the book it's in.
 	internal readonly int[] CHAPTER_LOCALS = new int[MAX_CHAPTER_COUNT];
+	// The book each chapter is located in (this array has a lot of repitition).
 	internal readonly int[] CHAPTER_BOOKS = new int[MAX_CHAPTER_COUNT];
+	// The number of verses in each chapter.
 	internal readonly int[] CHAPTER_LENGTHS = new int[MAX_CHAPTER_COUNT];
+	// I forgor
 	internal readonly int[] CHAPTER_HEADS = new int[MAX_CHAPTER_COUNT];
+
+	internal int current_book => CHAPTER_BOOKS[chapter_index];
+
+	internal int current_book_head => BOOK_HEADS[current_book];
+	internal int current_book_length => BOOK_LENGTHS[current_book];
 
 	#endregion
 
@@ -183,6 +197,9 @@ public class BibleHost : UdonSharpBehaviour
 		}
 
 		_trans_text.text = abbr;
+		_chapter_selector.ResetChildren();
+
+
 		UpdateChapterIndex();
 		reader.Init();
 	}

@@ -22,7 +22,7 @@ public class ButtonGrid : UdonSharpBehaviour
 
 	protected virtual void Start()
 	{
-		Reset(0);
+		ResetChildren();
 	}
 
 	private void Clear()
@@ -32,7 +32,7 @@ public class ButtonGrid : UdonSharpBehaviour
 			Destroy(_row_parent.GetChild(i).gameObject);
 	}
 
-	public virtual void Reset(int index)
+	public virtual void ResetChildren()
 	{
 		Clear();
 
@@ -46,7 +46,7 @@ public class ButtonGrid : UdonSharpBehaviour
 				if (xy >= max_buttons) break;
 
 				var button = Instantiate(_pref_button, last_row).GetComponent<Button>();
-				button.Init(_host, GetButtonIndex(index, xy));
+				button.Init(_host, xy);
 			}
 		}
 
@@ -59,5 +59,24 @@ public class ButtonGrid : UdonSharpBehaviour
 		}
 	}
 
-	protected virtual int GetButtonIndex(int index, int local) => local;
+	public virtual void UpdateVisibleChildren(int index)
+	{
+		GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
+
+		for (var y = 0; y < _row_parent.childCount; y++)
+		{
+			var row = _row_parent.GetChild(y);
+
+			// // For some reason, this line SOMETIMES likes to pretend that the index is 0 on this line, but it's the correct value in the next loop. I do NOT understand what's going on with that. Must be Unity going senile. I refuse to believe I'm going insane.
+			//
+			row.gameObject.SetActive(y * _max_buttons_in_row < index);
+			if (!row.gameObject.activeSelf) continue;
+
+			for (var x = 0; x < row.childCount; x++)
+			{
+				var xy = y * _max_buttons_in_row + x;
+				row.GetChild(x).GetComponent<Button>().SetVisible(xy < index);
+			}
+		}
+	}
 }

@@ -1171,6 +1171,7 @@ MonoBehaviour:
   _book_text: {fileID: 3044658255945919586}
   _chapter_text: {fileID: 6319937779689636397}
   _tab_selector: {fileID: 5756921698551640664}
+  _chapter_selector: {fileID: 221187912773362415}
 --- !u!114 &8388543244694224073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1939,7 +1940,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3938788090905784580}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
