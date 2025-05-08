@@ -7,23 +7,25 @@ using VRC.Udon;
 
 public class Setting_OwnerButton : Setting_Button
 {
-    [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private string claimed_message;
     [SerializeField] private string unclaimed_message;
 
-	public override void Refresh()
+    private TextMeshProUGUI label;
+
+	protected override void Start()
+	{
+        label = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+
+		base.Start();
+	}
+
+    public override void Refresh()
 	{
         base.Refresh();
 
-        if (deed.claimant != null)
-            label.text = deed.claimant.displayName;
+        if (deed.is_claimed)
+            label.text = deed.is_owner ? claimed_message : $"Owner: {deed.claimant.displayName}";
         else
-            label.text = "Unclaimed";
-
-        // if (deed.has_been_claimed)
-        //     // label.text = deed.is_owner ? claimed_message : $"Owner: {deed.claimant.displayName}";
-        //     label.text = $"Owner: {deed.claimant.displayName}";
-        // else
-        //     label.text = unclaimed_message;
+            label.text = unclaimed_message;
 	}
 }

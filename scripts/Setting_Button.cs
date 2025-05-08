@@ -19,4 +19,9 @@ public class Setting_Button : BibleDeedListener
 	{
         button.interactable = deed.is_owner_or_unclaimed;
 	}
+
+	public void OnPressed()
+	{
+		Sync();
+	}
 }

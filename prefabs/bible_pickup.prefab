@@ -552,6 +552,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2079493598057982859, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079493598057982859, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079493598057982859, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079493598057982859, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079493598057982859, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2263299401377362808, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -804,6 +829,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4559073855331896741, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
+    - target: {fileID: 4575686732439384077, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1242918140385505541}
+    - target: {fileID: 4575686732439384077, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: TryReturnToSpawner
+      objectReference: {fileID: 0}
     - target: {fileID: 4699669797581998573, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1318,6 +1353,22 @@ PrefabInstance:
       propertyPath: _udonSharpBackingUdonBehaviour
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7512613401740816211, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: claimed_message
+      value: Return to shelf
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512613401740816211, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: unclaimed_message
+      value: Pick up to claim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512613401740816211, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 7512613401740816211, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
     - target: {fileID: 7517004354047287435, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: close_object

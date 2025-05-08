@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks.Triggers;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
@@ -11,7 +12,7 @@ using VRC.Udon;
 public class BibleDeed : UdonSharpBehaviour
 {
     // These components will have networked functions called on them from here whenever the claimant changes.
-    [SerializeField] public UdonSharpBehaviour[] listener_components;
+    [SerializeField] public BibleDeedListener[] listener_components;
 
 
     [UdonSynced] private bool _is_claimed = false;
@@ -24,8 +25,7 @@ public class BibleDeed : UdonSharpBehaviour
         get => _is_claimed ? Networking.GetOwner(gameObject) : null;
         private set {
             _is_claimed = value != null;
-            if (_is_claimed)
-                Networking.SetOwner(value, gameObject);
+            Networking.SetOwner(_is_claimed ? value : Networking.LocalPlayer, gameObject);
 
             Sync();
         }
@@ -61,7 +61,7 @@ public class BibleDeed : UdonSharpBehaviour
 
         foreach (var script in listener_components) {
             Networking.SetOwner(Networking.GetOwner(gameObject), script.gameObject);
-            script.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, "Sync");
+            script.Sync();
         }
     }
 
@@ -75,7 +75,12 @@ public class BibleDeed : UdonSharpBehaviour
         Refresh();
     }
 
-    public void ClaimLocalToggle() => claimant = _is_claimed ? null : Networking.LocalPlayer;
+    public void ClaimLocalToggle()
+    {
+        if (is_claimed_by_other) return;
+
+        claimant = _is_claimed ? null : Networking.LocalPlayer;
+    }
     public void ClaimLocalPlayer() => claimant = Networking.LocalPlayer;
     public void Unclaim() => claimant = null;
 }

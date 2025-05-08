@@ -13,6 +13,13 @@ public class BibleDeedListener : UdonSharpBehaviour
         Refresh();
     }
 
+    protected virtual void Update()
+    {
+        if (deed == null) return;
+
+        Refresh();
+    }
+
     public override void OnDeserialization()
     {
         Refresh();
