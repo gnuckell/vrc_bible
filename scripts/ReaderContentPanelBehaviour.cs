@@ -17,13 +17,13 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 	{
 		chapter_index = chapt;
 
-		if (reader.host.CHAPTER_LOCALS[chapt] == 0)
-			book_title_text.text = $"{reader.host.BOOK_NAMES[reader.host.CHAPTER_BOOKS[chapt]]}";
+		if (reader.host.chapter_locals[chapt] == 0)
+			book_title_text.text = $"{reader.host.book_names[reader.host.chapter_books[chapt]]}";
 		else
 			Destroy(book_title_text.gameObject);
 
-		if (reader.host.BOOK_LENGTHS[reader.host.CHAPTER_BOOKS[chapt]] > 1)
-			chapter_title_text.text = $"Chapter {reader.host.CHAPTER_LOCALS[chapt] + 1}";
+		if (reader.host.book_lengths[reader.host.chapter_books[chapt]] > 1)
+			chapter_title_text.text = $"Chapter {reader.host.chapter_locals[chapt] + 1}";
 		else
 			Destroy(chapter_title_text.gameObject);
 

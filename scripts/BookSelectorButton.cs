@@ -8,8 +8,8 @@ public class BookSelectorButton : Button
 {
 	public override void OnClick()
 	{
-		host.chapter_index = host.BOOK_HEADS[index];
-		if (host.BOOK_LENGTHS[index] == 1)
+		host.chapter_index = host.book_heads[index];
+		if (host.book_lengths[index] == 1)
 		{
 			host.reader.ResetContent(host.chapter_index);
 			host.active_window_index = EBibleWindow.Reader;
@@ -20,5 +20,5 @@ public class BookSelectorButton : Button
 		}
 	}
 
-	protected override string GetButtonText(int i) => $"{host.BOOK_NAMES[i]}";
+	protected override string GetButtonText(int i) => $"{host.book_names[i]}";
 }

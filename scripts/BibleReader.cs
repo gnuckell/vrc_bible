@@ -209,7 +209,7 @@ public class BibleReader : UdonSharpBehaviour
 
 	private ReaderContentPanelBehaviour CreateChapterContent(int chapter)
 	{
-		if (chapter < 0 || chapter >= BibleHost.MAX_CHAPTER_COUNT) return null;
+		if (chapter < 0 || chapter >= host.max_chapter_count) return null;
 
 		var obj = Instantiate(pref_content, _scroll_rect.content);
 		var panel = obj.GetComponent<ReaderContentPanelBehaviour>();
@@ -222,8 +222,8 @@ public class BibleReader : UdonSharpBehaviour
 	{
 		var result = string.Empty;
 
-		var char_head = host.CHAPTER_HEADS[chapter];
-		for (var i = 0; i < host.CHAPTER_LENGTHS[chapter]; i++)
+		var char_head = host.chapter_heads[chapter];
+		for (var i = 0; i < host.chapter_lengths[chapter]; i++)
 		{
 			var char_end = host.content_lut.IndexOf(BibleHost.SEP, char_head);
 			result += $" {GetRichVerseNumber(i)}{host.content_lut.Substring(char_head, char_end - char_head)}";

@@ -9,16 +9,6 @@ public class BibleHost : UdonSharpBehaviour
 {
 	#region Constants
 
-	/// <summary>
-	/// Total number books in the Bible.
-	///</summary>
-	internal const int MAX_BOOK_COUNT = 66;
-
-	/// <summary>
-	/// Total number of chapters in the Bible. Used to simplify reference indeces and quicken verse loading.
-	///</summary>
-	internal const int MAX_CHAPTER_COUNT = 1189;
-
 	internal const int LUT_REF_LENGTH = 8;
 	internal const int LUT_REF_PREFIX_LENGTH = 9;
 	internal const char SEP = '\n';
@@ -66,10 +56,10 @@ public class BibleHost : UdonSharpBehaviour
 		if (_chapter_index == _chapter_index_SYNC) return;
 		_chapter_index = _chapter_index_SYNC;
 
-		_chapter_text.text = $"{CHAPTER_LOCALS[_chapter_index] + 1}";
-		_book_text.text = $"{BOOK_ABBRS[book_index]}";
+		_chapter_text.text = $"{chapter_locals[_chapter_index] + 1}";
+		_book_text.text = $"{book_names_short[book_index]}";
 	}
-	public int book_index => CHAPTER_BOOKS[_chapter_index];
+	public int book_index => chapter_books[_chapter_index];
 
 	public EBibleWindow active_window_index
 	{
@@ -81,28 +71,38 @@ public class BibleHost : UdonSharpBehaviour
 	private string _content_lut;
 	internal string content_lut { get => _content_lut; private set => _content_lut = value; }
 
+	/// <summary>
+	/// Total number books in the translation.
+	///</summary>
+	internal int max_book_count = 66;
+
+	/// <summary>
+	/// Total number of chapters in the translation. Used to simplify reference indeces and quicken verse loading.
+	///</summary>
+	internal int max_chapter_count = 1189;
+
 	// Full names of each book, e.g. Genesis, Exodus, Leviticus
-	internal readonly string[] BOOK_NAMES = new string[MAX_BOOK_COUNT];
+	internal string[] book_names;
 	// Abbreviated names of each book, e.g. GEN, EXO, LEV
-	internal readonly string[] BOOK_ABBRS = new string[MAX_BOOK_COUNT];
+	internal string[] book_names_short;
 	// The length (in chapters) of each book.
-	internal readonly int[] BOOK_LENGTHS = new int[MAX_BOOK_COUNT];
+	internal int[] book_lengths;
 	// The head chapter address (in the global chapter index) of each book.
-	internal readonly int[] BOOK_HEADS = new int[MAX_BOOK_COUNT];
+	internal int[] book_heads;
 
 	// The chapter number each chapter is, relative to the book it's in.
-	internal readonly int[] CHAPTER_LOCALS = new int[MAX_CHAPTER_COUNT];
+	internal int[] chapter_locals;
 	// The book each chapter is located in (this array has a lot of repitition).
-	internal readonly int[] CHAPTER_BOOKS = new int[MAX_CHAPTER_COUNT];
+	internal int[] chapter_books;
 	// The number of verses in each chapter.
-	internal readonly int[] CHAPTER_LENGTHS = new int[MAX_CHAPTER_COUNT];
+	internal int[] chapter_lengths;
 	// I forgor
-	internal readonly int[] CHAPTER_HEADS = new int[MAX_CHAPTER_COUNT];
+	internal int[] chapter_heads;
 
-	internal int current_book => CHAPTER_BOOKS[chapter_index];
+	internal int current_book => chapter_books[chapter_index];
 
-	internal int current_book_head => BOOK_HEADS[current_book];
-	internal int current_book_length => BOOK_LENGTHS[current_book];
+	internal int current_book_head => book_heads[current_book];
+	internal int current_book_length => book_lengths[current_book];
 
 	#endregion
 
@@ -124,6 +124,19 @@ public class BibleHost : UdonSharpBehaviour
 
 	public void Init(string name, string abbr, TextAsset books, TextAsset address, TextAsset content)
 	{
+		max_book_count = 66;
+		max_chapter_count = 1189;
+
+		book_names = new string[max_book_count];
+		book_names_short = new string[max_book_count];
+		book_lengths = new int[max_book_count];
+		book_heads = new int[max_book_count];
+
+		chapter_locals = new int[max_chapter_count];
+		chapter_books = new int[max_chapter_count];
+		chapter_lengths = new int[max_chapter_count];
+		chapter_heads = new int[max_chapter_count];
+
 		book_lut = books.text;
 		address_lut = address.text;
 		content_lut = content.text;
@@ -131,14 +144,14 @@ public class BibleHost : UdonSharpBehaviour
 #if UNITY_EDITOR
 		/**	Validate files
 		*/
-		if (address_lut[8] == '\r')
+		if (address_lut[LUT_REF_LENGTH] == '\r')
 		{
 			Debug.LogError($"The address document '{address.name}' uses CRLF line endings, please change to LF.");
 			return;
 		}
-		if (address_lut.Substring(address_lut.Length - LUT_REF_LENGTH, LUT_REF_LENGTH) != "00000000")
+		if (address_lut.Substring(address_lut.Length - LUT_REF_LENGTH, LUT_REF_LENGTH) != string.Empty.PadRight(LUT_REF_LENGTH, '0'))
 		{
-			Debug.LogError($"The address document '{address.name}' must end with a terminating string of zeroes ('00000000')");
+			Debug.LogError($"The address document '{address.name}' must end with a terminating string of zeroes ('{string.Empty.PadRight(LUT_REF_LENGTH, '0')}')");
 			return;
 		}
 #endif
@@ -148,7 +161,7 @@ public class BibleHost : UdonSharpBehaviour
 		/**	Set indeces for each book.
 		*/
 		var head = 0;
-		for (var i = 0; i < MAX_BOOK_COUNT; i++)
+		for (var i = 0; i < max_book_count; i++)
 		{
 			var line_start = BibleUtils.NthIndexOf(book_lut, SEP, i - 1);
 			var line_end = BibleUtils.NthIndexOf(book_lut, SEP, i) - 1;
@@ -158,12 +171,12 @@ public class BibleHost : UdonSharpBehaviour
 			var name_tail = BibleUtils.NthIndexOf(line, ',', 0);
 			var abbr_tail = BibleUtils.NthIndexOf(line, ',', 1);
 
-			BOOK_NAMES[i] = line.Substring(0, name_tail - 1);
-			BOOK_ABBRS[i] = line.Substring(name_tail, abbr_tail - name_tail - 1);
-			BOOK_LENGTHS[i] = int.Parse(line.Substring(abbr_tail));
-			BOOK_HEADS[i] = head;
+			book_names[i] = line.Substring(0, name_tail - 1);
+			book_names_short[i] = line.Substring(name_tail, abbr_tail - name_tail - 1);
+			book_lengths[i] = int.Parse(line.Substring(abbr_tail));
+			book_heads[i] = head;
 
-			head += BOOK_LENGTHS[i];
+			head += book_lengths[i];
 		}
 
 		/**	Set indeces for each chapter.
@@ -172,20 +185,20 @@ public class BibleHost : UdonSharpBehaviour
 		var l = 0;
 		var v = 0;
 		var h = 0;
-		for (var i = 0; i < CHAPTER_HEADS.Length; i++)
+		for (var i = 0; i < chapter_heads.Length; i++)
 		{
 			var v_address = GetAddress(v);
 			var j = 0;
 			do j++; while (AddressesShareChapter(v_address, GetAddress(v + j)));
 
-			CHAPTER_BOOKS[i] = b;
-			CHAPTER_LOCALS[i] = l;
-			CHAPTER_LENGTHS[i] = j;
-			CHAPTER_HEADS[i] = h;
+			chapter_books[i] = b;
+			chapter_locals[i] = l;
+			chapter_lengths[i] = j;
+			chapter_heads[i] = h;
 
 			// Debug.Log($"[{i}] book={b}, local={l}, length={j}, head={h}");
 
-			h = BibleUtils.NthIndexOf(content_lut, SEP, CHAPTER_LENGTHS[i] - 1, h);
+			h = BibleUtils.NthIndexOf(content_lut, SEP, chapter_lengths[i] - 1, h);
 			v += j;
 			if (AddressesShareBook(v_address, GetAddress(v)))
 				l++;
@@ -211,7 +224,7 @@ public class BibleHost : UdonSharpBehaviour
 
 	/** <<============================================================>> **/
 
-	public int GetChapterFromLocals(int book, int chapter) => BOOK_HEADS[book] + chapter;
+	public int GetChapterFromLocals(int book, int chapter) => book_heads[book] + chapter;
 	public string GetAddress(int line) => address_lut.Substring(line * (LUT_REF_LENGTH + 1), LUT_REF_LENGTH);
 
 	private bool AddressesShareBook(string a, string b) => a.Substring(0, 2) == b.Substring(0, 2);

@@ -20,7 +20,7 @@ public sealed class ChapterSelector : ButtonGrid
 	public override void ResetChildren()
 	{
 		max_buttons = 0;
-		foreach (var i in host.BOOK_LENGTHS)
+		foreach (var i in host.book_lengths)
 			max_buttons = Math.Max(i, max_buttons);
 
 		base.ResetChildren();
