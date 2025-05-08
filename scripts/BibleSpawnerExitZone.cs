@@ -64,14 +64,11 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
         {
             if (current_object.GetComponent<BiblePickup>() != null)
                 current_object.GetComponent<BiblePickup>().ClaimHolder();
-        }
 
-        if (Networking.IsOwner(gameObject))
-        {
             current_object = GetNextAvailable();
             SetPoolObjectActive(current_object, true);
 
-            RequestSerialization();
+            Sync();
         }
     }
 
