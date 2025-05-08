@@ -198,6 +198,8 @@ public class BibleReaderContent : UdonSharpBehaviour
 			result += $" {GetRichVerseNumber(i)}{host.content_lut.Substring(char_head + BibleHost.LUT_REF_PREFIX_LENGTH, char_end - (char_head + BibleHost.LUT_REF_PREFIX_LENGTH))}";
 			char_head = char_end + 1;
 		}
+
+		if (result == string.Empty) return string.Empty;
 		return result.Substring(1);
 	}
 
