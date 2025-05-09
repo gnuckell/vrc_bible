@@ -36,6 +36,8 @@ public class ButtonGrid : UdonSharpBehaviour
 	{
 		Clear();
 
+		Debug.Log($"Creating {max_buttons} new buttons.");
+
 		RectTransform last_row = null;
 		for (int y = 0; y < _max_rows && y * _max_buttons_in_row < max_buttons; y++)
 		{

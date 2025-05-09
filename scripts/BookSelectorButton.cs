@@ -20,5 +20,5 @@ public class BookSelectorButton : Button
 		}
 	}
 
-	protected override string GetButtonText(int i) => $"{host.book_names[i]}";
+	protected override string GetButtonText(int i) => host.book_names[i];
 }

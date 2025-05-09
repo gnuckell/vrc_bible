@@ -32,6 +32,8 @@ public class BibleHost : UdonSharpBehaviour
 	[SerializeField] private TextMeshProUGUI _chapter_text;
 
 	[SerializeField] private TabSelector _tab_selector;
+
+	[SerializeField] private ButtonGrid _book_selector;
 	[SerializeField] private ButtonGrid _chapter_selector;
 
 	[Header("Settings")]
@@ -202,8 +204,8 @@ public class BibleHost : UdonSharpBehaviour
 		}
 
 		_trans_text.text = abbr;
+		_book_selector.ResetChildren();
 		_chapter_selector.ResetChildren();
-
 
 		UpdateChapterIndex();
 		reader.Init();

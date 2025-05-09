@@ -12,4 +12,11 @@ public sealed class BookSelector : ButtonGrid
 
 		ResetChildren();
 	}
+
+	public override void ResetChildren()
+	{
+		max_buttons = host.max_book_count;
+
+		base.ResetChildren();
+	}
 }

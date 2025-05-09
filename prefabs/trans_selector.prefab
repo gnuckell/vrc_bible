@@ -254,6 +254,11 @@ PrefabInstance:
       propertyPath: m_text
       value: English Standard Version <sub>ESV</sub>
       objectReference: {fileID: 0}
+    - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294104734
+      objectReference: {fileID: 0}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: abbr
@@ -448,7 +453,7 @@ PrefabInstance:
         type: 3}
       propertyPath: content
       value: 
-      objectReference: {fileID: 4900000, guid: 879bd541b9a0ac54292c827e16a30ad5, type: 3}
+      objectReference: {fileID: 4900000, guid: a08ed825c77dc8a4db5f2103233eea73, type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -598,6 +603,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: New International Version <sub>NIV</sub>
+      objectReference: {fileID: 0}
+    - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294104734
       objectReference: {fileID: 0}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -758,6 +768,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: New American Standard Bible <sub>NASB</sub>
+      objectReference: {fileID: 0}
+    - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294104734
       objectReference: {fileID: 0}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
