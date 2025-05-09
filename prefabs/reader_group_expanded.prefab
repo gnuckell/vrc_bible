@@ -209,6 +209,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
         type: 3}
+      propertyPath: m_lineSpacing
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
+        type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -4011288490570011189, guid: 3c13943f6e0d28840ac217d6eabed3bf,

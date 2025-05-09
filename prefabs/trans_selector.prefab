@@ -417,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_text
-      value: King James Version <sub>KJV</sub>
+      value: New King James Version <sub>NKJV</sub>
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -427,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: abbr
-      value: KJV
+      value: NKJV
       objectReference: {fileID: 0}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: title
-      value: King James Version
+      value: New King James Version
       objectReference: {fileID: 0}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -453,7 +453,7 @@ PrefabInstance:
         type: 3}
       propertyPath: content
       value: 
-      objectReference: {fileID: 4900000, guid: a08ed825c77dc8a4db5f2103233eea73, type: 3}
+      objectReference: {fileID: 4900000, guid: d042f97af12984043a3060df92bd35b7, type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -578,7 +578,7 @@ PrefabInstance:
     - target: {fileID: 5006454146476475810, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_Name
-      value: kjv
+      value: nkjv
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -241,14 +241,24 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
         type: 3}
+      propertyPath: m_lineSpacing
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
+        type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -415756764679213, guid: dff679141b7505b4682be27424b25945,
         type: 2}
     - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
         type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 256
+      propertyPath: m_characterSpacing
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
+        type: 3}
+      propertyPath: m_wordWrappingRatios
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7824298361689297265, guid: 66c7704e4e9dbb94a8f39a786579bed4,
         type: 3}
