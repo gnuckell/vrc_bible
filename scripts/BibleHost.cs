@@ -34,7 +34,9 @@ public class BibleHost : UdonSharpBehaviour
 	[SerializeField] private TabSelector _tab_selector;
 
 	[SerializeField] private ButtonGrid _book_selector;
+	public ButtonGrid book_selector => _book_selector;
 	[SerializeField] private ButtonGrid _chapter_selector;
+	public ButtonGrid chapter_selector => _chapter_selector;
 
 	[Header("Settings")]
 
@@ -99,11 +101,6 @@ public class BibleHost : UdonSharpBehaviour
 	// I forgor
 	internal int[] chapter_heads;
 
-	internal int current_book => chapter_books[chapter_index];
-
-	internal int current_book_head => book_heads[current_book];
-	internal int current_book_length => book_lengths[current_book];
-
 	#endregion
 
 	void Start()
@@ -160,7 +157,10 @@ public class BibleHost : UdonSharpBehaviour
 			book_heads[i] = max_chapter_count;
 
 			max_chapter_count += book_lengths[i];
+
+			Debug.Log($"Book: [{i}] {book_names[i]}, chapter length: {book_lengths[i]}, head: {book_heads[i]}");
 		}
+
 
 		chapter_locals = new int[max_chapter_count];
 		chapter_books = new int[max_chapter_count];

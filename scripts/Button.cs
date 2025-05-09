@@ -22,6 +22,8 @@ public abstract class Button : UdonSharpBehaviour
 
 	protected virtual void Start()
 	{
+		if (image != null) return;
+
 		image = GetComponent<Image>();
 		image_color = image.color;
 		button_component = GetComponent<UnityEngine.UI.Button>();
@@ -29,6 +31,8 @@ public abstract class Button : UdonSharpBehaviour
 
 	public void Init(BibleHost host, int index)
 	{
+		Start();
+
 		_host = host;
 		_index = index;
 

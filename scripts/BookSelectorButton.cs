@@ -9,16 +9,9 @@ public class BookSelectorButton : Button
 	public override void OnClick()
 	{
 		host.chapter_index = host.book_heads[index];
-		if (host.book_lengths[index] == 1)
-		{
-			host.reader.ResetContent(host.chapter_index);
-			host.active_window_index = EBibleWindow.Reader;
-		}
-		else
-		{
-			host.active_window_index = EBibleWindow.ChapterSelector;
-		}
+		host.reader.ResetContent(host.chapter_index);
+		host.active_window_index = host.book_lengths[index] == 1 ? EBibleWindow.Reader : EBibleWindow.ChapterSelector;
 	}
 
-	protected override string GetButtonText(int i) => host.book_names[i];
+	protected override string GetButtonText(int i) => i < host.book_names.Length ? $"{host.book_names[i]}" : "???";
 }

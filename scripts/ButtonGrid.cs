@@ -32,33 +32,35 @@ public class ButtonGrid : UdonSharpBehaviour
 			Destroy(_row_parent.GetChild(i).gameObject);
 	}
 
-	public virtual void ResetChildren()
+	private void Resize(int count)
 	{
-		Clear();
-
-		Debug.Log($"Creating {max_buttons} new buttons.");
-
-		RectTransform last_row = null;
-		for (int y = 0; y < _max_rows && y * _max_buttons_in_row < max_buttons; y++)
+		var length = _row_parent.childCount;
+		for (int y = 0; y * _max_buttons_in_row < count || y < length; y++)
 		{
-			last_row = (RectTransform)Instantiate(_pref_row, _row_parent).transform;
+			RectTransform current_row = (RectTransform)(y < length ? _row_parent.GetChild(y) : Instantiate(_pref_row, _row_parent).transform);
+
+			if (y * _max_buttons_in_row >= count)
+			{
+				Destroy(current_row.gameObject);
+				continue;
+			}
+
 			for (int x = 0; x < _max_buttons_in_row; x++)
 			{
-				var xy = y * _max_buttons_in_row + x;
-				if (xy >= max_buttons) break;
+				var i = y * _max_buttons_in_row + x;
+				var current_button = (x < current_row.childCount ? current_row.GetChild(x) : Instantiate(_pref_button, current_row).transform).GetComponent<Button>();
 
-				var button = Instantiate(_pref_button, last_row).GetComponent<Button>();
-				button.Init(_host, xy);
+				current_button.Init(_host, i);
+				current_button.SetVisible(i < count);
 			}
 		}
+	}
 
-		if (last_row == null) return;
+	public virtual void ResetChildren()
+	{
+		Debug.Log($"Creating {max_buttons} new buttons.");
 
-		var remaining_slot_count = (_max_buttons_in_row - (last_row.childCount % _max_buttons_in_row)) % _max_buttons_in_row;
-		for (int x = 0; x < remaining_slot_count; x++)
-		{
-			Instantiate(_pref_placeholder, last_row);
-		}
+		Resize(max_buttons);
 	}
 
 	public virtual void UpdateVisibleChildren(int index)
@@ -68,16 +70,13 @@ public class ButtonGrid : UdonSharpBehaviour
 		for (var y = 0; y < _row_parent.childCount; y++)
 		{
 			var row = _row_parent.GetChild(y);
-
-			// // For some reason, this line SOMETIMES likes to pretend that the index is 0 on this line, but it's the correct value in the next loop. I do NOT understand what's going on with that. Must be Unity going senile. I refuse to believe I'm going insane.
-			//
 			row.gameObject.SetActive(y * _max_buttons_in_row < index);
 			if (!row.gameObject.activeSelf) continue;
 
 			for (var x = 0; x < row.childCount; x++)
 			{
-				var xy = y * _max_buttons_in_row + x;
-				row.GetChild(x).GetComponent<Button>().SetVisible(xy < index);
+				var i = y * _max_buttons_in_row + x;
+				row.GetChild(x).GetComponent<Button>().SetVisible(i < index);
 			}
 		}
 	}

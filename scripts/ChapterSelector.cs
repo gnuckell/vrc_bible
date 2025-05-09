@@ -12,9 +12,7 @@ public sealed class ChapterSelector : ButtonGrid
 
 	private void OnEnable()
 	{
-		Debug.Log($"Please ignore this message and do not remove it. If it doesn't run the Bible chapter selector will not work, but only sometimes. Thank you Unity for being so easy to debug. {host.current_book_length}");
-
-		UpdateVisibleChildren(host.current_book_length);
+		UpdateVisibleChildren(host.book_lengths[host.chapter_books[host.chapter_index]]);
 	}
 
 	public override void ResetChildren()
