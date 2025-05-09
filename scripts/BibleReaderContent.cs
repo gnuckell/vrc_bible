@@ -186,22 +186,4 @@ public class BibleReaderContent : UdonSharpBehaviour
 		panel.Init(this, chapter);
 		return panel;
 	}
-
-	public string CreateChapterText(int chapter)
-	{
-		var result = string.Empty;
-
-		var char_head = host.chapter_heads[chapter];
-		for (var i = 0; i < host.chapter_lengths[chapter]; i++)
-		{
-			var char_end = host.content_lut.IndexOf(BibleHost.SEP, char_head);
-			result += $" {GetRichVerseNumber(i)}{host.content_lut.Substring(char_head + BibleHost.LUT_REF_PREFIX_LENGTH, char_end - (char_head + BibleHost.LUT_REF_PREFIX_LENGTH))}";
-			char_head = char_end + 1;
-		}
-
-		if (result == string.Empty) return string.Empty;
-		return result.Substring(1);
-	}
-
-	private static string GetRichVerseNumber(int index) => $"<sup>{index + 1}</sup>";
 }

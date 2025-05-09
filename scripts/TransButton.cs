@@ -8,8 +8,6 @@ public sealed class TransButton : Button
 {
 	public string title;
 	public string abbr;
-	public TextAsset books;
-	public TextAsset address;
 	public TextAsset content;
 
 	protected override void Start()
@@ -31,7 +29,7 @@ public sealed class TransButton : Button
 
 	public void UpdateHost()
 	{
-		host.Init(title, abbr, books, address, content);
+		host.Init(abbr, content);
 	}
 
 	protected override string GetButtonText(int i) => $"{title} <sub>{abbr}</sub>";

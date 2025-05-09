@@ -27,6 +27,6 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 		else
 			Destroy(chapter_title_text.gameObject);
 
-		content_text.text = reader.CreateChapterText(chapt);
+		content_text.text = reader.host.CreateChapterText(chapt);
 	}
 }
