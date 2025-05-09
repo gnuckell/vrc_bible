@@ -10,7 +10,8 @@ public sealed class ChapterSelectorButton : Button
 	public override void OnClick()
 	{
 		host.chapter_index = host.book_heads[host.book_index] + index;
-		host.reader.ResetContent(host.chapter_index);
+		Networking.SetOwner(Networking.LocalPlayer, host.reader.gameObject);
+		host.reader.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "ResetContent");
 		host.active_window_index = EBibleWindow.Reader;
 	}
 

@@ -51,6 +51,8 @@ public class Setting_Dropdown : BibleDeedListener
 
     public void OnValueChanged()
     {
+        Networking.SetOwner(Networking.LocalPlayer, deed.gameObject);
+        Networking.SetOwner(Networking.LocalPlayer, gameObject);
         value = dropdown.value;
     }
 }

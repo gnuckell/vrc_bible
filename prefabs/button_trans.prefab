@@ -108,6 +108,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294104734
+      objectReference: {fileID: 0}
     - target: {fileID: 4599137043416438090, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -202,6 +207,11 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6856960360427382664}
   text: {fileID: 589661018880120359}
+  _host: {fileID: 0}
+  _index: 0
+  title: 
+  abbr: 
+  content: {fileID: 0}
 --- !u!114 &6856960360427382664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +231,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 1
+  _syncMethod: 3
   serializedProgramAsset: {fileID: 11400000, guid: f56fe086537aad4488f4b31a54c2ec2b,
     type: 2}
   programSource: {fileID: 11400000, guid: 222ade816eef5eb4db1dcefee261bbed, type: 2}

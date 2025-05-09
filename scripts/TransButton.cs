@@ -19,12 +19,17 @@ public sealed class TransButton : Button
 
 	public override void OnClick()
 	{
+		// OnAnyoneClick();
+		SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, "OnAnyoneClick");
+	}
+
+	public void OnAnyoneClick()
+	{
 		if (host != null)
 		{
 			UpdateHost();
 			host.active_window_index = EBibleWindow.Reader;
 		}
-
 	}
 
 	public void UpdateHost()
