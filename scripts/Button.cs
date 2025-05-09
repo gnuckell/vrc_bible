@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
@@ -8,13 +9,16 @@ using VRC.Udon;
 
 public abstract class Button : UdonSharpBehaviour
 {
-	[SerializeField] protected TextMeshProUGUI text;
+	// [SerializeField] protected TextMeshProUGUI label;
 
 	[SerializeField] private BibleHost _host;
 	public BibleHost host => _host;
 
 	public int _index;
 	public int index => _index;
+
+	private TextMeshProUGUI _label;
+	public TextMeshProUGUI label => _label;
 
 	private Image image;
 	private Color image_color;
@@ -24,6 +28,7 @@ public abstract class Button : UdonSharpBehaviour
 	{
 		if (image != null) return;
 
+		_label = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 		image = GetComponent<Image>();
 		image_color = image.color;
 		button_component = GetComponent<UnityEngine.UI.Button>();
@@ -36,16 +41,24 @@ public abstract class Button : UdonSharpBehaviour
 		_host = host;
 		_index = index;
 
-		text.text = GetButtonText(index);
+		_label.text = GetButtonText(index);
 	}
 
 	public void SetVisible(bool visible)
 	{
-		text.enabled = visible;
+		_label.enabled = visible;
 		image.color = visible ? image_color : Color.clear;
 		button_component.enabled = visible;
 	}
 
+	public void RewriteLabel(GameObject prefab)
+	{
+		var temp = _label.text;
+		Destroy(_label.gameObject);
+		_label = Instantiate(prefab, transform).GetComponent<TextMeshProUGUI>();
+		_label.text = temp;
+	}
+
 	public abstract void OnClick();
-	protected abstract string GetButtonText(int i);
+	protected virtual string GetButtonText(int i) => _label.text;
 }

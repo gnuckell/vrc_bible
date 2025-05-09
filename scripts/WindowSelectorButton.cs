@@ -4,18 +4,17 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-public class WindowSelectorButton : UdonSharpBehaviour
+public class WindowSelectorButton : Button
 {
-	[SerializeField] private BibleHost _host;
 	[SerializeField] private EBibleWindow _window;
 
-	void Start()
+	protected override void Start()
 	{
-
+		base.Start();
 	}
 
-	public void OnClick()
+	public override void OnClick()
 	{
-		_host.active_window_index = _window;
+		host.active_window_index = _window;
 	}
 }

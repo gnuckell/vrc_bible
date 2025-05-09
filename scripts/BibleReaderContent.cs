@@ -7,6 +7,7 @@ using VRC.Udon;
 
 public class BibleReaderContent : UdonSharpBehaviour
 {
+	[SerializeField] private Setting_FontFamily setting_font_family;
 	[SerializeField] public GameObject pref_content;
     [SerializeField] private BibleHost _host;
 	public BibleHost host => _host;
@@ -38,8 +39,11 @@ public class BibleReaderContent : UdonSharpBehaviour
         // Sync();
     }
 
-    public void Init()
+    public void Init(GameObject fontOverride)
     {
+		pref_content = fontOverride != null ? fontOverride : setting_font_family.current_font;
+		Debug.Log($"Inited reader with font: {pref_content}");
+
         ResetContent();
     }
 

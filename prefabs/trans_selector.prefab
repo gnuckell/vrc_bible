@@ -126,12 +126,12 @@ PrefabInstance:
     - target: {fileID: 1097969283530269693, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_Size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1097969283530269693, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2759413387439865415, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -328,6 +328,18 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: 9e495c793bfe806439b9d5ddcab4e1c7, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 9113569087789502986, guid: 824e5a96a9c8edc43a758c463ebc9f8f,
+        type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: reader_font_prefab
+      value: 
+      objectReference: {fileID: 5100122725518430124, guid: 52f0a401ea26d4641bb7a4d3cb4f7676,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -466,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -498,6 +510,12 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: 9be39aa367e520240b2241b4ec58f5b1, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 888025428619565636, guid: 4b47ef2e971430643be2162f8bb8d29b,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -636,7 +654,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -685,6 +703,18 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: ef6e04dc6200e8e43be97b8652d3f279, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 9113569087789502986, guid: 4c04defe2f4342341b7a9b9d803b6d75,
+        type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: reader_font_prefab
+      value: 
+      objectReference: {fileID: 5100122725518430124, guid: 891cf29ef7749f34483f21367864e959,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -823,7 +853,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -855,6 +885,12 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: a102eee764490d8438a9d78f6e6480d9, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 888025428619565636, guid: 4b47ef2e971430643be2162f8bb8d29b,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -993,7 +1029,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -1030,6 +1066,12 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: d042f97af12984043a3060df92bd35b7, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 888025428619565636, guid: 4b47ef2e971430643be2162f8bb8d29b,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1183,7 +1225,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -1215,6 +1257,12 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: b60dd64a8c9251744b40937b83e6e704, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 888025428619565636, guid: 4b47ef2e971430643be2162f8bb8d29b,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1353,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 589661018880120359, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
@@ -1385,6 +1433,12 @@ PrefabInstance:
       propertyPath: content
       value: 
       objectReference: {fileID: 4900000, guid: d9a1577d01616cd4fa1debcc95ea0f85, type: 3}
+    - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
+        type: 3}
+      propertyPath: button_font_prefab
+      value: 
+      objectReference: {fileID: 888025428619565636, guid: 4b47ef2e971430643be2162f8bb8d29b,
+        type: 3}
     - target: {fileID: 1602361630912872911, guid: 08ad0ab5a90ea484cbd1a4cbb3b02d8b,
         type: 3}
       propertyPath: serializationData.Prefab

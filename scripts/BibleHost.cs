@@ -27,9 +27,9 @@ public class BibleHost : UdonSharpBehaviour
 	[SerializeField] private BibleReaderContent _reader;
 	public BibleReaderContent reader => _reader;
 
-	[SerializeField] private TextMeshProUGUI _trans_text;
-	[SerializeField] private TextMeshProUGUI _book_text;
-	[SerializeField] private TextMeshProUGUI _chapter_text;
+	[SerializeField] private WindowSelectorButton _trans_button;
+	[SerializeField] private WindowSelectorButton _book_button;
+	[SerializeField] private WindowSelectorButton _chapter_button;
 
 	[SerializeField] private TabSelector _tab_selector;
 
@@ -37,6 +37,9 @@ public class BibleHost : UdonSharpBehaviour
 	public ButtonGrid book_selector => _book_selector;
 	[SerializeField] private ButtonGrid _chapter_selector;
 	public ButtonGrid chapter_selector => _chapter_selector;
+
+	[SerializeField] private GameObject[] button_font_objects;
+	[SerializeField] private GameObject[] reader_font_objects;
 
 	[Header("Settings")]
 
@@ -57,11 +60,12 @@ public class BibleHost : UdonSharpBehaviour
 	}
 	private void UpdateChapterIndex()
 	{
-		if (_chapter_index == _chapter_index_SYNC) return;
+		// if (_chapter_index == _chapter_index_SYNC) return;
 		_chapter_index = _chapter_index_SYNC;
 
-		_chapter_text.text = $"{chapter_locals[_chapter_index] + 1}";
-		_book_text.text = $"{book_names[book_index]}";
+		_chapter_button.label.text = $"{chapter_locals[_chapter_index] + 1}";
+		_book_button.label.text = $"{book_names[chapter_books[_chapter_index]]}";
+		_book_button.RewriteLabel(_button_font_prefab);
 	}
 	public int book_index => chapter_books[_chapter_index];
 
@@ -72,6 +76,11 @@ public class BibleHost : UdonSharpBehaviour
 	}
 	private string _translation_text;
 	internal string translation_text { get => _translation_text; private set => _translation_text = value; }
+
+	private GameObject _button_font_prefab;
+	public GameObject button_font_prefab => _button_font_prefab;
+	private GameObject _reader_font_prefab;
+	public GameObject reader_font_prefab => _reader_font_prefab;
 
 	/// <summary>
 	/// Total number books in the translation.
@@ -119,8 +128,11 @@ public class BibleHost : UdonSharpBehaviour
 		UpdateChapterIndex();
 	}
 
-	public void Init(string abbr, TextAsset content_file)
+	public void Init(string abbr, TextAsset content_file, GameObject __button_font_prefab, GameObject __reader_font_prefab)
 	{
+		_button_font_prefab = __button_font_prefab;
+		_reader_font_prefab = __reader_font_prefab;
+
 		translation_text = content_file.text;
 
 		/** Set the number of all books in the translation.
@@ -158,7 +170,7 @@ public class BibleHost : UdonSharpBehaviour
 
 			max_chapter_count += book_lengths[i];
 
-			Debug.Log($"Book: [{i}] {book_names[i]}, chapter length: {book_lengths[i]}, head: {book_heads[i]}");
+			// Debug.Log($"Book: [{i}] {book_names[i]}, chapter length: {book_lengths[i]}, head: {book_heads[i]}");
 		}
 
 
@@ -203,12 +215,15 @@ public class BibleHost : UdonSharpBehaviour
 			}
 		}
 
-		_trans_text.text = abbr;
+		_trans_button.label.text = abbr;
+
 		_book_selector.ResetChildren();
+		_book_selector.UpdateLabels(_button_font_prefab);
+
 		_chapter_selector.ResetChildren();
 
 		UpdateChapterIndex();
-		reader.Init();
+		reader.Init(_reader_font_prefab);
 	}
 
 	public string CreateChapterText(int chapter)

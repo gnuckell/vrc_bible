@@ -58,8 +58,6 @@ public class ButtonGrid : UdonSharpBehaviour
 
 	public virtual void ResetChildren()
 	{
-		Debug.Log($"Creating {max_buttons} new buttons.");
-
 		Resize(max_buttons);
 	}
 
@@ -77,6 +75,19 @@ public class ButtonGrid : UdonSharpBehaviour
 			{
 				var i = y * _max_buttons_in_row + x;
 				row.GetChild(x).GetComponent<Button>().SetVisible(i < index);
+			}
+		}
+	}
+
+	public void UpdateLabels(GameObject prefab)
+	{
+		for (var y = 0; y < _row_parent.childCount; y++)
+		{
+			var row = _row_parent.GetChild(y);
+			for (var x = 0; x < row.childCount; x++)
+			{
+				var button = row.GetChild(x).GetComponent<Button>();
+				button.RewriteLabel(prefab);
 			}
 		}
 	}
