@@ -11,6 +11,8 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
     [SerializeField] private Transform spawn_transform;
     [SerializeField] private GameObject prefab_spawn;
 
+    [SerializeField] private GameObject master_object;
+
     private GameObject[] object_pool;
 
     [UdonSynced] private uint pool_bitmask = 0u;
@@ -23,6 +25,9 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 
     private void Start()
     {
+        if (!Networking.IsMaster)
+            Destroy(master_object);
+
         if (spawn_transform.childCount == 0) return;
 
         object_pool = new GameObject[spawn_transform.childCount];
@@ -86,6 +91,17 @@ public class BibleSpawnerExitZone : UdonSharpBehaviour
 
         Networking.SetOwner(Networking.LocalPlayer, gameObject);
         RequestSerialization();
+    }
+
+    public void ReturnAll()
+    {
+        for (var i = 0; i < object_pool.Length; i++)
+        {
+            var pickup = object_pool[i].GetComponent<BiblePickup>();
+            if (pickup == null) continue;
+
+            pickup.ReturnToSpawner();
+        }
     }
 
     private void SetPoolObjectActive(GameObject obj, bool active)

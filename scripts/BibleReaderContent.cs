@@ -42,7 +42,6 @@ public class BibleReaderContent : UdonSharpBehaviour
     public void Init(GameObject fontOverride)
     {
 		pref_content = fontOverride != null ? fontOverride : setting_font_family.current_font;
-		Debug.Log($"Inited reader with font: {pref_content}");
 
         ResetContent();
     }
