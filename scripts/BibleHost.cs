@@ -20,8 +20,6 @@ public class BibleHost : UdonSharpBehaviour
 
 	[Header("References")]
 
-	public GameObject close_object;
-
 	public TranslationButton trans_default;
 
 	[SerializeField] private BibleReader _reader;
@@ -111,7 +109,9 @@ public class BibleHost : UdonSharpBehaviour
 
 	void Start()
 	{
+#if !UNITY_EDITOR
 		trans_default.UpdateHost();
+#endif
 	}
 
 	public void Despawn()
@@ -241,11 +241,6 @@ public class BibleHost : UdonSharpBehaviour
 	}
 
 	private static string GetRichVerseNumber(int index) => $"<sup>{index + 1}</sup>";
-
-	public void OnClose()
-	{
-		Destroy(close_object);
-	}
 
 	/** <<============================================================>> **/
 

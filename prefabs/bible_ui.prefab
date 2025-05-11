@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 580}
+  m_SizeDelta: {x: 0, y: 584}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8631032927267217572
 CanvasRenderer:
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4372371854156716131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,8 +1173,6 @@ MonoBehaviour:
   _tab_selector: {fileID: 5756921698551640664}
   _book_selector: {fileID: 6934992700649115385}
   _chapter_selector: {fileID: 221187912773362415}
-  button_font_objects: []
-  reader_font_objects: []
 --- !u!114 &8388543244694224073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6178,12 +6176,12 @@ PrefabInstance:
     - target: {fileID: 1097969283530269693, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_Size
-      value: 0.9
+      value: 0.90625
       objectReference: {fileID: 0}
     - target: {fileID: 1097969283530269693, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 1.000004
       objectReference: {fileID: 0}
     - target: {fileID: 2759413387439865415, guid: d8ceed1e9206de64383bef17fc797421,
         type: 3}
