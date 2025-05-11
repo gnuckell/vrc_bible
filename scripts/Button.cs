@@ -24,7 +24,7 @@ public abstract class Button : UdonSharpBehaviour
 	private Color image_color;
 	private UnityEngine.UI.Button button_component;
 
-	protected virtual void Start()
+	public virtual void Start()
 	{
 		if (image != null) return;
 

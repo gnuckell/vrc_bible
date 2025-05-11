@@ -12,7 +12,7 @@ public sealed class TransButton : Button
 	public GameObject button_font_prefab;
 	public GameObject reader_font_prefab;
 
-	protected override void Start()
+	public override void Start()
 	{
 		base.Start();
 

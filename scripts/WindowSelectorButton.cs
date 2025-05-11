@@ -8,7 +8,7 @@ public class WindowSelectorButton : Button
 {
 	[SerializeField] private EBibleWindow _window;
 
-	protected override void Start()
+	public override void Start()
 	{
 		base.Start();
 	}
