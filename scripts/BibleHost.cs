@@ -63,8 +63,6 @@ public class BibleHost : UdonSharpBehaviour
 		// if (_chapter_index == _chapter_index_SYNC) return;
 		_chapter_index = _chapter_index_SYNC;
 
-		if (_chapter_button.label == null) _chapter_button.Start(); _book_button.Start();
-
 		_chapter_button.label.text = $"{chapter_locals[_chapter_index] + 1}";
 		_book_button.label.text = $"{book_names[chapter_books[_chapter_index]]}";
 		_book_button.RewriteLabel(_button_font_prefab);
@@ -217,7 +215,7 @@ public class BibleHost : UdonSharpBehaviour
 			}
 		}
 
-		if (_trans_button.label == null) _trans_button.Start();
+		if (_trans_button.label == null) _trans_button.Start(); _chapter_button.Start(); _book_button.Start();
 
 		_trans_button.label.text = abbr;
 
