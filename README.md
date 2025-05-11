@@ -1,6 +1,7 @@
 
 # Add to a World
 
+Note: When simulating your world in the editor, a translation must be manually selected before using. This is to reduce load times on startup.
 
 # Add to an Avatar
 
