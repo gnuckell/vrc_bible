@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-public sealed class TransButton : Button
+public sealed class TranslationButton : Button
 {
 	public string title;
 	public string abbr;

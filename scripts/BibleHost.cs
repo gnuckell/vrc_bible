@@ -22,7 +22,7 @@ public class BibleHost : UdonSharpBehaviour
 
 	public GameObject close_object;
 
-	public TransButton trans_default;
+	public TranslationButton trans_default;
 
 	[SerializeField] private BibleReader _reader;
 	public BibleReader reader => _reader;
@@ -37,9 +37,6 @@ public class BibleHost : UdonSharpBehaviour
 	public ButtonGrid book_selector => _book_selector;
 	[SerializeField] private ButtonGrid _chapter_selector;
 	public ButtonGrid chapter_selector => _chapter_selector;
-
-	[SerializeField] private GameObject[] button_font_objects;
-	[SerializeField] private GameObject[] reader_font_objects;
 
 	[Header("Settings")]
 
