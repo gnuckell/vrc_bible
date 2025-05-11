@@ -15,6 +15,7 @@ public class BiblePickup : UdonSharpBehaviour
 	private void Start()
 	{
 		pickup = GetComponent<VRC_Pickup>();
+		pickup.orientation = Networking.LocalPlayer.IsUserInVR() ? VRC_Pickup.PickupOrientation.Any : VRC_Pickup.PickupOrientation.Gun;
 	}
 
 	public override void OnPickup()

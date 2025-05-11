@@ -219,7 +219,7 @@ MonoBehaviour:
   ExactGun: {fileID: 1302436634196296594}
   ExactGrip: {fileID: 0}
   allowManipulationWhenEquipped: 1
-  orientation: 2
+  orientation: 0
   AutoHold: 2
   InteractionText: Hold
   UseText: 
@@ -1586,7 +1586,7 @@ PrefabInstance:
     - target: {fileID: 8931261458607296469, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0.999998
       objectReference: {fileID: 0}
     - target: {fileID: 9170549672060693235, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
