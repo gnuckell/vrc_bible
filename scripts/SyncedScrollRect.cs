@@ -10,7 +10,7 @@ public class SyncedScrollRect : UdonSharpBehaviour
 	private const float SCROLL_ALPHA_SPEED = 5f;
 
     [SerializeField] private ScrollRect _scroll_rect;
-    [SerializeField] private BibleReaderContent _bible_reader_content;
+    [SerializeField] private BibleReader _bible_reader_content;
 
 	[UdonSynced] private float _scroll_value_SYNC;
 

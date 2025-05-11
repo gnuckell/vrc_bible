@@ -7,7 +7,7 @@ using VRC.Udon;
 public class Setting_FontFamily : Setting_Dropdown
 {
     [SerializeField] private GameObject[] font_prefabs;
-    [SerializeField] private BibleReaderContent bibleReaderContent;
+    [SerializeField] private BibleReader bibleReaderContent;
 
     public GameObject current_font => font_prefabs[value];
 

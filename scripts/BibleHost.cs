@@ -24,8 +24,8 @@ public class BibleHost : UdonSharpBehaviour
 
 	public TransButton trans_default;
 
-	[SerializeField] private BibleReaderContent _reader;
-	public BibleReaderContent reader => _reader;
+	[SerializeField] private BibleReader _reader;
+	public BibleReader reader => _reader;
 
 	[SerializeField] private WindowSelectorButton _trans_button;
 	[SerializeField] private WindowSelectorButton _book_button;

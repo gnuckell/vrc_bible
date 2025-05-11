@@ -5,7 +5,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-public class ReaderContentPanelBehaviour : UdonSharpBehaviour
+public class ChapterContent : UdonSharpBehaviour
 {
 	[SerializeField] private TextMeshProUGUI book_title_text;
 	[SerializeField] private TextMeshProUGUI chapter_title_text;
@@ -13,7 +13,7 @@ public class ReaderContentPanelBehaviour : UdonSharpBehaviour
 
 	public int chapter_index = 0;
 
-	public void Init(BibleReaderContent reader, int chapt)
+	public void Init(BibleReader reader, int chapt)
 	{
 		chapter_index = chapt;
 
