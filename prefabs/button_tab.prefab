@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
       propertyPath: m_fontSize
-      value: 31.7
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
@@ -147,6 +147,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeMax
       value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567664149526998325, guid: a42f852a50e6e7245930195aecad0f22,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293179017
       objectReference: {fileID: 0}
     - target: {fileID: 4599137043416438090, guid: a42f852a50e6e7245930195aecad0f22,
         type: 3}
@@ -230,6 +235,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 8288511108506475203}
   _host: {fileID: 0}
+  _index: 0
   _window: 4
 --- !u!114 &8288511108506475203
 MonoBehaviour:

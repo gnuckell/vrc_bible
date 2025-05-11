@@ -53,10 +53,10 @@ public abstract class Button : UdonSharpBehaviour
 
 	public void RewriteLabel(GameObject prefab)
 	{
-		var temp = _label.text;
+		var temp_text = _label.text;
 		Destroy(_label.gameObject);
 		_label = Instantiate(prefab, transform).GetComponent<TextMeshProUGUI>();
-		_label.text = temp;
+		_label.text = temp_text;
 	}
 
 	public abstract void OnClick();
