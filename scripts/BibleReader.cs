@@ -169,11 +169,13 @@ public class BibleReader : UdonSharpBehaviour
 
 	private ChapterContent CalculateFocusedChild()
 	{
+		var content_height = _scroll_rect.content.rect.height;
+		var scroll_vertical_position = (1f - _scroll_rect.verticalNormalizedPosition) * content_height;
 		for (int i = _scroll_rect.content.childCount - 1; i >= 0; i--)
 		{
 			var iChild = (RectTransform)_scroll_rect.content.GetChild(i);
-			var iPosition = 1f + (iChild.anchoredPosition.y / _scroll_rect.content.rect.height);
-			if (_scroll_rect.verticalNormalizedPosition < iPosition)
+			content_height -= iChild.rect.height;
+			if (content_height < scroll_vertical_position)
 				return iChild.GetComponent<ChapterContent>();
 		}
 		return content_focused;
