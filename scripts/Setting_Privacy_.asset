@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: Setting_Privacy_
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: f1b8baaa54aa4e84bbec04f2d3a516b9,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 78149ef5b5de093449ffe51858ad0355,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 4c3a68171d1364546a5485ebfb4d05c4, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 9467f1dbe151fe642a897a07789e68ef, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 0

@@ -748,6 +748,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3787539681165898708, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
+    - target: {fileID: 3839920555381700633, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: mesh_object
+      value: 
+      objectReference: {fileID: 254827291570159155}
+    - target: {fileID: 3839920555381700633, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: prop_object
+      value: 
+      objectReference: {fileID: 5651167850597063607}
+    - target: {fileID: 3839920555381700633, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3839920555381700633, guid: 99320beb0d8d89e478d0d9742acf91b5,
+        type: 3}
     - target: {fileID: 3855519536834125974, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1586,7 +1602,7 @@ PrefabInstance:
     - target: {fileID: 8931261458607296469, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}
       propertyPath: m_Value
-      value: 0.999998
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9170549672060693235, guid: 99320beb0d8d89e478d0d9742acf91b5,
         type: 3}

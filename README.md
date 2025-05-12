@@ -1,35 +1,55 @@
 
-# Add to a World
+# What?
 
-Note: When simulating your world in the editor, a translation must be manually selected before using. This is to reduce load times on startup.
+This is the official repository for the VRChat Bible Reader. These tools allow users to read the Bible together in [VRChat](https://hello.vrchat.com/) worlds. I created this as a way to streamline online Bible study for my long-distance friends and I hope it will do the same for you!
 
-# Add to an Avatar
+# How to Add to a World
 
+Note: When simulating your world in the editor, a translation must be manually selected before using. This is to reduce load times on startup. Editor simulation is generally buggy.
 
-# Change the Size / Resolution
+To begin, add this repository to anywhere in your project files. Inside the `prefabs` folder you will find four key prefabs which you may use to populate your world.
+
+### • `bible_pickup`
+
+This is a single instance of a Bible pickup that people can hold in their hands. The first player who first picks it up will own it. You can spawn just one of these into the world, but it is better to use a `bible_spawner` instead.
+
+### • `bible_spawner`
+
+This is a container that holds many `bible_pickup`s and dynamically loads them in as users take them from the shelf. You can have multiple of these in the world; each one has its own pool of Bibles. You can also add or remove Bibles from the pool by adding/removing `bible_pickup` prefabs inside the `spawn_transform` GameObject.
+
+A special button will appear for the world master that allows them to return all Bibles to the spawner that owns it.
+
+### • `bible_stand`
+
+This is just a 3D model of a pulpit-like structure with collision. Use it however you wish.
+
+### • `bible_ui`
+
+This is the main Bible prefab and can be placed anywhere! Place this by itself into the world to create a Bible that cannot be moved. This is useful for creating a large display that everyone can read. Unlike `bible_pickup`s, its ownership must be manually claimed. This prefab is used directly by `bible_pickup`, so modifying this prefab will also modify all `bible_pickup`s (which is recommended if you are adding translations).
+
+# How to Change the Size / Resolution
 
 Changing the size and/or resolution of the window can only be done via the Unity editor.
-To do this, there are a few numerical values that must be set. Start in the GameObject `bible_ui` and update the 3D scale (the default is 0.01).
+To do this, there are a few numerical values that must be set. Start in the `bible_ui` instance and update the 3D scale (the default is 0.01) until the text is the desired size.
 Then, to set the dimensions, set the `RectTransform.width` and `RectTransform.height`, and also update the `BoxCollider.size` to match.
-Finally, select the GameObject `bible_ui > Panel > Main Window Container` and update the height to match the bottom of the canvas.
+Finally, select the GameObject `bible_ui > Panel > Main Window Container` and update the height to fit the bottom of the canvas.
 
+# How to Add New Translations
 
-# Translations
+You can have as many translations as you want, but they must be preinstalled on the Bible Reader attached to the world or avatar. They are not streamed in or fetched from an online source when loading into the world. The reason for this is so that no user needs to enable `Allow Untrusted URLs`; translations will be included with the world/avatar when it loads. Translations are fairly large (for text files, around ~5MB), so having dozens and dozens of translations will add up the file size.
 
-You can have as many translations as you want, but they must be preinstalled on the Bible Reader attached to the world or avatar. They are not streamed in or fetched from an online source when loading into the world. The reason for this is so that no user needs to enable `Allow Untrusted URLs`; translations will be included with the world/avatar when it loads. Translations are fairly large (for text files, around ~4MB), so having dozens and dozens of translations will add up the file size.
+## 1. Formatting a translation
 
-## Formatting a translation
+Each translation comes as a single `.txt` file with two sections: a <b>HEADER</b> section and a <b>CONTENT</b> section. The formatting of this file is essential to ensure the text is displayed properly. You will need to format the data manually (ideally, using a script). If you are familiar with JSON, check out https://bolls.life/api/ for a great source for translations. The default translations in this repository all come from here.
 
-Each translation comes as a single `.txt` file with two sections: a <b>HEADER</b> section and a <b>CONTENT</b> section. The formatting of this file is essential to ensure the text is displayed properly. First of all, the file must be in LF, UTF-8 format. It can be located anywhere in the project.
+First of all, the file must be in LF, UTF-8 format. It can be located anywhere in the project.
 
 The Header section contains the names of each book as well as the number of chapters in each book. Each line represents one book, in the format `<BOOK_NAME>,<CHAPTER_COUNT>` , e.g. `GENESIS,50` . An empty line marks the end of the Header section.
 
 The Content section contains the content of the translation. Each line represents one verse, in the format `<VERSE_ADDRESS> <VERSE_CONTENT>` where `VERSE_ADDRESS` is a string of nine digits denoting the book, chapter, and verse numbers, and `VERSE_CONTENT` is the text itself. The verse content may contain formatting tokens that TextMeshPro can parse, such as `<i>` or `<b>`.
 An empty string of zeroes `000000000` marks the end of the Content section. This must be the last line in the file.
 
-If you obtain your translation from https://bolls.life/api/, you can also use my custom formatting tool to quickly convert this data into the proper format. If your translation comes from any other source, you will need to format the data manually (ideally, using a script).
-
-## Adding the translation to the reader UI
+## 2. Adding the translation to the reader UI
 
 To actually have the translation become available in the reader, you'll need to add a new entry for it so users can select it.
 
@@ -42,7 +62,7 @@ To actually have the translation become available in the reader, you'll need to 
 7. In `bible_ui` prefab, make sure that the new button's `Host` field is set to `bible_ui (Bible Host)`.
 8. (Optional) To set the translation as the default, go to the `bible_ui` prefab > `BibleHost` script > `trans_default` field, click the radio button to select a new default.
 
-## Adding fonts for non-Latin languages
+## 3. Adding fonts for non-Latin languages (if needed)
 
 For non-Latin languages there are a few more steps you'll need to do to make sure your text displays properly in the reader.
 
